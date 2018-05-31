@@ -63,6 +63,11 @@ export default {
           return false;
         }
       });
+
+      // TODO: directly goto the main page, need login validation, and change the function call
+      this.$router.push('/dashboard');
+      // TODO: need a global validate function to check whether login or not
+
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
@@ -72,4 +77,7 @@ export default {
 </script>
 
 <style scoped>
+  .login-box{
+    margin-top: 60px;
+  }
 </style>

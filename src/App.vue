@@ -5,9 +5,11 @@
 </template>
 
 <script>
+  //TODO: store the informations of the account in the Vue
 export default {
   name: 'App'
 }
+
 </script>
 
 <style>
@@ -17,6 +19,11 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+/*eliminate white border*/
+body {
+   margin: 0;
+   padding: 0;
 }
 </style>
