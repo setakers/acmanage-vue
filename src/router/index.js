@@ -2,10 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Login  from '@/components/pages/Login'
-import Dashboard from '@/components/pages/Dashboard'
 import Container from '@/components/public/Container'
 import Main from '@/components/public/Main'
 import Welcome from '@/components/public/Welcome'
+import UserPanel from '@/components/pages/UserPanel'
 
 Vue.use(Router);
 
@@ -58,10 +58,10 @@ export default new Router({
       component: Login
     },
     {
-      path: '/dashboard',
-      redirect: '/dashboard/welcome',
-      name: 'Dashboard',
-      component: Dashboard,
+      path: '/UserPanel',
+      redirect: '/UserPanel/welcome',
+      name: 'UserPanel',
+      component: UserPanel,
       children: [
         personal_sys,
         select_sys,

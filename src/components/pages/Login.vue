@@ -22,9 +22,9 @@
 
 <script>
 // This is a function. The function returns the API URL
-import getApiPath   from '../modules/getApiPath';
+import getApiPath   from '../../modules/getApiPath';
 // This function returns a timestamp
-import getTimestamp from '../modules/getTimestamp';
+import getTimestamp from '../../modules/getTimestamp';
 import Axios from 'axios';
 export default {
   name: "Login",
@@ -129,6 +129,7 @@ export default {
 }
 .login-box {
   width: 100%;
+  margin-top: 150px;
 }
 .login-form {
   width: 500px;
