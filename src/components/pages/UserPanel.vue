@@ -10,7 +10,7 @@
 
 <script>
 import Axios from 'axios';
-import getApiPath   from '../modules/getApiPath';
+import getApiPath   from '../../modules/getApiPath';
 export default {
   name: "UserPanel",
   data() {
