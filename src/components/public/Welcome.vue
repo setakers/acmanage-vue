@@ -33,18 +33,18 @@
                 delete Axios.defaults.headers.common['authorization'];
                 this.$router.push({ name: 'Login' });
             }
-            // Default navigation behavior
-            if(localStorage.getItem('accessToken')) {
-                // Set the authorization
-                Axios.defaults.headers.common['authorization']
-                    = localStorage['accessToken'];
-                Axios.get(getApiPath('login/auth'))
-                    .then((res) => {
-                        if(res.status !== 200) { gotoLogin(); return; }
-                    });
-            } else {
-                gotoLogin();
-            }
+            // // Default navigation behavior
+            // if(localStorage.getItem('accessToken')) {
+            //     // Set the authorization
+            //     Axios.defaults.headers.common['authorization']
+            //         = localStorage['accessToken'];
+            //     Axios.get(getApiPath('login/auth'))
+            //         .then((res) => {
+            //             if(res.status !== 200) { gotoLogin(); return; }
+            //         });
+            // } else {
+            //     gotoLogin();
+            // }
         }
     }
 </script>

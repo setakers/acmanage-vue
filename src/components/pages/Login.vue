@@ -56,6 +56,10 @@ export default {
   },
   methods: {
     submitForm(formName) {
+
+      //TODO: remove this when it's useless
+      this.$router.push({ name: 'UserPanel' }); //just for test
+
       this.$refs[formName].validate((valid) => {
         if (valid) {
           if(this.userInfo.pass === '') {
@@ -103,11 +107,11 @@ export default {
   beforeCreate() {
     var gotoPanel = () => {
       this.$router.push({ name: 'UserPanel' });
-    }
+    };
     var cleanUp = () => {
       localStorage.clear();
       delete Axios.defaults.headers.common['authorization'];
-    }
+    };
     // Default navigation behavior
     if(localStorage.getItem('accessToken')) {
       // Set the authorization
