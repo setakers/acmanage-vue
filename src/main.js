@@ -4,6 +4,8 @@ import Vue from 'vue';
 // Element UI library
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+//Echarts
+import echarts from 'echarts'
 // Vue application
 import App from './App';
 // Routing
@@ -11,6 +13,7 @@ import router from './router';
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
+Vue.prototype.$echarts = echarts
 
 /* eslint-disable no-new */
 new Vue({

@@ -16,7 +16,10 @@
     </div>
 
     <div class="content" v-if=" selected !== 'welcome_sys' ">
-      <person_info v-if=" func_path === 'person_info' "></person_info>
+      <personal_info v-if=" func_path === 'person_info' "></personal_info>
+      <deal_publicity v-if=" func_path === 'deal_publicity' "></deal_publicity>
+      <stu_query_score v-if=" func_path === 'stu_query_score' "></stu_query_score>
+      <query_exam v-if=" func_path === 'query_exam' "></query_exam>
     </div>
 
     <template v-if=" selected === 'welcome_sys' ">
@@ -28,12 +31,15 @@
 
 <script>
     import subsys from '../navigation/Subsystems'
-    import Person_info from "./person_info";
+    import Personal_info from "./personal_info";
     import Welcome from "./Welcome";
+    import Deal_publicity from "./deal_publicity";
+    import Stu_query_score from "./stu_query_score";
+    import Query_exam from "./query_exam";
 
     export default {
       name: "Container",
-        components: {Welcome, Person_info},
+        components: {Query_exam, Stu_query_score, Deal_publicity, Welcome, Personal_info},
         props: ['selected'],
       data: function(){
           // var role = localStorage.roles;
@@ -48,7 +54,7 @@
       },
       methods:{
           handleSelect(key){
-              this.active_key = key;
+                this.active_key = key;
           }
       },
       watch: {
@@ -72,14 +78,14 @@
 
 <style scoped>
   .content{
-    background: none repeat scroll 0 0 #F9FAFC;
+    background: none repeat scroll 0 0 #F6F6F6;
     position: absolute;
     left: 200px;
     right: 0;
     top: 60px;
     bottom: 0;
     width: auto;
-    padding: 20px;
+    padding: 40px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     overflow-y: scroll;

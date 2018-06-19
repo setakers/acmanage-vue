@@ -41,9 +41,19 @@ export const query_exam = {
     path: 'query_exam',
     icon: 'el-icon-edit'
 };
-export const query_score = {
+export const stu_query_score = {
     title: '成绩查询',
-    path: 'query_score',
+    path: 'stu_query_score',
+    icon: 'el-icon-view'
+};
+export const teach_query_score = {
+    title: '成绩查询',
+    path: 'teach_query_score',
+    icon: 'el-icon-view'
+};
+export const admin_query_score = {
+    title: '成绩查询',
+    path: 'admin_query_score',
     icon: 'el-icon-view'
 };
 export const input_score = {
@@ -60,13 +70,12 @@ export const deal_score_change = {
     title: '成绩修改审批',
     path: 'apply_socre_change',
     icon: 'el-icon-sort-down'
+}
+export const deal_publicity = {
+    title: '成绩修改公示',
+    path: 'deal_publicity',
+    icon: 'el-icon-info'
 };
-export const query_teaching_score = {
-    title: '查看教学班成绩',
-    path: 'query_teaching_score',
-    icon: 'el-icon-search'
-};
-
 
 
 //教学资源管理

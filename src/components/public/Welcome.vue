@@ -11,6 +11,7 @@
 <script>
     import Axios from 'axios';
     import getApiPath from '../../modules/getApiPath';
+    import checkLogin from '../../modules/checkLogin';
 
     export default {
         name: "Welcome",
@@ -27,24 +28,8 @@
                 this.$router.push({ name: 'Login' });
             }
         },
-        beforeCreate() {
-            var gotoLogin = () => {
-                localStorage.clear();
-                delete Axios.defaults.headers.common['authorization'];
-                this.$router.push({ name: 'Login' });
-            }
-            // // Default navigation behavior
-            // if(localStorage.getItem('accessToken')) {
-            //     // Set the authorization
-            //     Axios.defaults.headers.common['authorization']
-            //         = localStorage['accessToken'];
-            //     Axios.get(getApiPath('login/auth'))
-            //         .then((res) => {
-            //             if(res.status !== 200) { gotoLogin(); return; }
-            //         });
-            // } else {
-            //     gotoLogin();
-            // }
+        beforeCreate: function(){
+            checkLogin(this);
         }
     }
 </script>

@@ -26,4 +26,15 @@ body {
    margin: 0;
    padding: 0;
 }
+
+.el-table .warning-row {
+    background: #fdf6ec;
+}
+
+.el-table .success-row {
+    background: #f0f9eb;
+}
+.el-table .danger-row {
+    background: #fef0f0
+}
 </style>

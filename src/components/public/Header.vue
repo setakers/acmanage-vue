@@ -39,7 +39,7 @@
     name: 'Header',
     data: function () {
       //get info from localstorage
-      let username = 'test';
+      let username = localStorage.getItem('username');
       let userrole = 'student';
       let system = sys[userrole];
 

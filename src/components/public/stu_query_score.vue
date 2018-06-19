@@ -1,0 +1,188 @@
+<template>
+    <div class="stu_query_score">
+        <div class="stu_score_table">
+            <el-pagination
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+                    :current-page="currentPage"
+                    :page-sizes="[5, 10, 15, 20]"
+                    :page-size="pagesize"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="tableData.length">
+            </el-pagination>
+            <el-table
+                    stripe
+                    align="center"
+                    :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                    style="width: 100%">
+                <el-table-column align="center" type="index"></el-table-column>
+                <el-table-column
+                        align="center"
+                        prop="course_name"
+                        label="课程名">
+                </el-table-column>
+                <el-table-column
+                        align="center"
+                        prop="teacher_name"
+                        sortable
+                        label="任课老师">
+                </el-table-column>
+                <el-table-column
+                        align="center"
+                        prop="score"
+                        sortable
+                        label="成绩">
+                </el-table-column>
+            </el-table>
+        </div>
+        <div class="drawtable">
+            <div class="myChart" :style="{width: '300px', height: '300px'}" v-if=" tableData.length !==0"></div>
+            <div class="chart-error" v-else><h2>没有数据所以统计图表也没得显示啦~</h2></div>
+        </div>
+    </div>
+</template>
+
+<script>
+    import checkLogin from '../../modules/checkLogin';
+    import Axios from 'axios';
+    import getApiPath from '../../modules/getApiPath';
+
+    export default {
+        name: "stu_query_score",
+        data () {
+            return {
+                pagesize: 5,
+                currentPage: 1,
+                tableData: []
+            }
+        },
+        computed: {
+            count_95(){
+                this.tableData.filter((item) => item.score >= 95).length;
+            },
+            count_85(){
+                this.tableData.filter((item) => item.score >= 85 && item.score < 95).length;
+            },
+            count_75(){
+                this.tableData.filter((item) => item.score >= 75 && item.score < 85).length;
+            },
+            count_60(){
+                this.tableData.filter((item) => item.score >= 60 && item.score < 75).length;
+            },
+            count_gg(){
+                this.tableData.filter((item) => item.score < 60).length;
+            }
+        },
+        activated(){
+            this.drawLine();
+        },
+        methods: {
+            drawLine(){
+                // 基于准备好的dom，初始化echarts实例
+                let myChart = this.$echarts.init(document.getElementById('myChart'));
+                // 绘制图表
+                myChart.setOption({
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: "{a} <br/>{b}: {c} ({d}%)"
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        x: 'left',
+                        data:['95-100','85-94','75-84','60-74','0-59']
+                    },
+                    series: [
+                        {
+                            name:'访问来源',
+                            type:'pie',
+                            radius: ['50%', '70%'],
+                            avoidLabelOverlap: false,
+                            label: {
+                                normal: {
+                                    show: false,
+                                    position: 'center'
+                                },
+                                emphasis: {
+                                    show: true,
+                                    textStyle: {
+                                        fontSize: '30',
+                                        fontWeight: 'bold'
+                                    }
+                                }
+                            },
+                            labelLine: {
+                                normal: {
+                                    show: false
+                                }
+                            },
+                            data:[
+                                {value:this.count_95(), name:'95-100'},
+                                {value:this.count_85(), name:'85-94'},
+                                {value:this.count_75(), name:'75-84'},
+                                {value:this.count_60(), name:'60-74'},
+                                {value:this.count_gg(), name:'0-59'}
+                            ]
+                        }
+                    ]
+                });
+            },
+            //used for paging
+            handleSizeChange: function (size) {
+                this.pagesize = size;
+            },
+            handleCurrentChange: function(currentPage){
+                this.currentPage = currentPage;
+            }
+        },
+        beforeCreate: function(){
+            checkLogin(this);
+            Axios.get(getApiPath('score/stuscore/' + localStorage.getItem('student_id')))
+                .then((res) => {
+                    if(res.status !== 200)
+                        this.$message({
+                            type: 'error',
+                            duration: 1500,
+                            message: '获取学生成绩失败，请检查网络连接'
+                        });
+                    else {
+                        this.tableData = res.data['tableData'];
+                    }
+                })
+                .catch((err) => {
+                    this.$message({
+                        type: 'error',
+                        duration: 1500,
+                        message: '获取学生成绩失败，请检查网络连接'
+                    });
+                });
+        }
+    }
+</script>
+
+<style scoped>
+    .stu_score_table{
+        position: absolute;
+        float: left;
+        width: 50%;
+        vertical-align: center;
+    }
+    .myChart{
+        position: relative;
+        float: left;
+        left: -75%;
+    }
+    .chart-error{
+        position: relative;
+        float: left;
+        left: -50%;
+        top: 50%;
+    }
+    .drawtable{
+        position: absolute;
+        float: left;
+        left: 75%;
+    }
+    .stu_query_score{
+        padding: 20px;
+    }
+</style>

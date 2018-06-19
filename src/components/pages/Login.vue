@@ -58,7 +58,7 @@ export default {
     submitForm(formName) {
 
       //TODO: remove this when it's useless
-      this.$router.push({ name: 'UserPanel' }); //just for test
+      // this.$router.push({ name: 'UserPanel' }); //just for test
 
       this.$refs[formName].validate((valid) => {
         if (valid) {
