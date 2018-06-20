@@ -121,29 +121,29 @@
                 pagesize: 10,
                 currentPage: 1,
                 tableData: [
-                    // {
-                    //     teacher_name: '2016-05-02',
-                    //     student_name: '王小虎',
-                    //     course_name: '上海市普陀区金沙江路 1518 弄',
-                    //     old_score: 12,
-                    //     new_score: 98,
-                    //     reason: '124',
-                    //     state: 1,
-                    //     query_time: 'time1',
-                    //     deal_time: 'time',
-                    // },
-                    // {
-                    //     teacher_name: '2016-05-02',
-                    //     student_name: '王小虎',
-                    //     course_name: '上海市普陀区金沙江路 1518 弄',
-                    //     old_score: 12,
-                    //     new_score: 98,
-                    //     reason: '123',
-                    //     state: 2,
-                    //     query_time: 'time',
-                    //     deal_time: 'time2',
-                    //     tag: '家'
-                    // }
+                    {
+                        teacher_name: '2016-05-02',
+                        student_name: '王小虎',
+                        course_name: '上海市普陀区金沙江路 1518 弄',
+                        old_score: 12,
+                        new_score: 98,
+                        reason: '124',
+                        state: 1,
+                        query_time: 'time1',
+                        deal_time: 'time',
+                    },
+                    {
+                        teacher_name: '2016-05-02',
+                        student_name: '王小虎',
+                        course_name: '上海市普陀区金沙江路 1518 弄',
+                        old_score: 12,
+                        new_score: 98,
+                        reason: '123',
+                        state: 2,
+                        query_time: 'time',
+                        deal_time: 'time2',
+                        tag: '家'
+                    }
                 ]
             }
         },

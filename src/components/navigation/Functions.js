@@ -51,11 +51,6 @@ export const teach_query_score = {
     path: 'teach_query_score',
     icon: 'el-icon-view'
 };
-export const admin_query_score = {
-    title: '成绩查询',
-    path: 'admin_query_score',
-    icon: 'el-icon-view'
-};
 export const input_score = {
     title: '成绩录入',
     path: 'input_score',
@@ -64,13 +59,13 @@ export const input_score = {
 export const apply_score_change = {
     title: '成绩修改申请',
     path: 'apply_score_change',
-    icon: 'el-icon-sort-up'
+    icon: 'el-icon-sort-down'
 };
 export const deal_score_change = {
     title: '成绩修改审批',
-    path: 'apply_socre_change',
-    icon: 'el-icon-sort-down'
-}
+    path: 'deal_score_change',
+    icon: 'el-icon-sort-up'
+};
 export const deal_publicity = {
     title: '成绩修改公示',
     path: 'deal_publicity',

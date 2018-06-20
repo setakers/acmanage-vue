@@ -37,4 +37,7 @@ body {
 .el-table .danger-row {
     background: #fef0f0
 }
+.is-active{
+  background-color: #ecf5ff;
+}
 </style>

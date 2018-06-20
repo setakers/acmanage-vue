@@ -12,7 +12,7 @@ const select = {
 const score = {
     student: [ funcs.deal_publicity, funcs.stu_query_score, funcs.query_exam ],
     teacher: [ funcs.deal_publicity, funcs.teach_query_score, funcs.input_score, funcs.apply_score_change ],
-    admin: [ funcs.deal_publicity, funcs.admin_query_score, funcs.deal_score_change ]
+    admin: [ funcs.deal_publicity, funcs.deal_score_change ]
 };
 const resource = {
     teacher: [ funcs.apply_course ],

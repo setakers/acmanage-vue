@@ -17,9 +17,15 @@
 
     <div class="content" v-if=" selected !== 'welcome_sys' ">
       <personal_info v-if=" func_path === 'person_info' "></personal_info>
+
+      <!--score_sys-->
       <deal_publicity v-if=" func_path === 'deal_publicity' "></deal_publicity>
       <stu_query_score v-if=" func_path === 'stu_query_score' "></stu_query_score>
       <query_exam v-if=" func_path === 'query_exam' "></query_exam>
+      <teach_query_score v-if=" func_path === 'teach_query_score' "></teach_query_score>
+      <input_score v-if=" func_path === 'input_score' "></input_score>
+      <apply_score_change v-if=" func_path === 'apply_score_change' "></apply_score_change>
+      <deal_score_change v-if=" func_path === 'deal_score_change' "></deal_score_change>
     </div>
 
     <template v-if=" selected === 'welcome_sys' ">
@@ -36,14 +42,22 @@
     import Deal_publicity from "./deal_publicity";
     import Stu_query_score from "./stu_query_score";
     import Query_exam from "./query_exam";
+    import Teach_query_score from "./teach_query_score";
+    import Input_score from "./input_score";
+    import Apply_score_change from "./apply_score_change";
+    import Deal_score_change from "./deal_score_change";
 
     export default {
       name: "Container",
-        components: {Query_exam, Stu_query_score, Deal_publicity, Welcome, Personal_info},
+        components: {
+            Deal_score_change,
+            Apply_score_change,
+            Input_score,
+            Teach_query_score, Query_exam, Stu_query_score, Deal_publicity, Welcome, Personal_info},
         props: ['selected'],
       data: function(){
           // var role = localStorage.roles;
-          let role = 'student';
+          let role = 'admin';
 
           return {
             subsys: subsys,
