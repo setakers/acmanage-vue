@@ -1,10 +1,10 @@
 # TODOs
-##注意，所有涉及时间的除了time_slot，数据库中其他均以TIMESTAMP存储，插入时若前端未指明，则后端用CURRENT_TIMESTAMP处理
+## 注意，所有涉及时间的除了time_slot，数据库中其他均以TIMESTAMP存储，插入时若前端未指明，则后端用CURRENT_TIMESTAMP处理
 <br />
 
 ## 用户登陆
 
-- [] localstorage保存内容
+- [ ] localstorage保存内容
 由于数据库与最初测试的数据结构不一致，localstorage中保存的内容要有所改
 需要一个updateAccessToken的接口，或者直接修改会话限制时间为900s(15min)
 

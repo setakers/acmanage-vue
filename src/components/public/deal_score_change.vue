@@ -132,12 +132,12 @@
                     type: 'warning'
                 }).then(() => {
                     var which = (this.currentPage - 1 ) * this.pagesize + index;
-                    var change = JSON.stringify({
+                    var changes = JSON.stringify({
                          query_id: query.query_id,
                             state: operation,
                         deal_time: (new Date()).valueOf()
                     });
-                    Axios.put(getApiPath('score/handle_query'), change )
+                    Axios.put(getApiPath('score/handle_query'), changes )
                         .then( (res) => {
                             if(res.status !== 200) {
                                 this.$message({
