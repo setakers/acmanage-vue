@@ -65,7 +65,7 @@
                 this.currentPage = currentPage;
             }
         },
-        beforeCreate: function(){
+        beforeMount: function(){
             checkLogin(this);
             Axios.get(getApiPath('score/queryexam/' + localStorage.getItem('student_id')))
                 .then((res) => {

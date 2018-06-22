@@ -28,7 +28,7 @@
                 this.$router.push({ name: 'Login' });
             }
         },
-        beforeCreate: function(){
+        beforeMount: function(){
             checkLogin(this);
         }
     }

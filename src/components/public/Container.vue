@@ -26,6 +26,8 @@
       <input_score v-if=" func_path === 'input_score' "></input_score>
       <apply_score_change v-if=" func_path === 'apply_score_change' "></apply_score_change>
       <deal_score_change v-if=" func_path === 'deal_score_change' "></deal_score_change>
+      <change_info v-if=" func_path === 'change_info' "></change_info>
+      <change_passwd v-if=" func_path === 'change_passwd' "></change_passwd>
     </div>
 
     <template v-if=" selected === 'welcome_sys' ">
@@ -46,10 +48,14 @@
     import Input_score from "./input_score";
     import Apply_score_change from "./apply_score_change";
     import Deal_score_change from "./deal_score_change";
+    import Change_info from "./change_info";
+    import Change_passwd from "./change_passwd";
 
     export default {
       name: "Container",
         components: {
+            Change_passwd,
+            Change_info,
             Deal_score_change,
             Apply_score_change,
             Input_score,
@@ -57,7 +63,7 @@
         props: ['selected'],
       data: function(){
           // var role = localStorage.roles;
-          let role = 'admin';
+          let role = 'teacher';
 
           return {
             subsys: subsys,

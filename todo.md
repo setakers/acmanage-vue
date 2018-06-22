@@ -1,12 +1,14 @@
 # TODOs
-## 注意，所有涉及时间的除了time_slot，数据库中其他均以TIMESTAMP存储，插入时若前端未指明，则后端用CURRENT_TIMESTAMP处理
+##注意，所有涉及时间的除了time_slot，数据库中其他均以TIMESTAMP存储，插入时若前端未指明，则后端用CURRENT_TIMESTAMP处理
 <br />
 
 ## 用户登陆
 
-- [ ] localstorage保存内容
+- [] localstorage保存内容
 由于数据库与最初测试的数据结构不一致，localstorage中保存的内容要有所改
+登录后保存第一张表的值，以及student_id 或者 teacher_id
 需要一个updateAccessToken的接口，或者直接修改会话限制时间为900s(15min)
+
 
 
 ## 考试与成绩
@@ -207,3 +209,76 @@ tableData: [
 }
 ```
 
+- [ ] `GET /api/info/stu/:student_id`
+成功状态码：200
+失败状态码：204
+需求：依据不同的student_id获取其个人信息，需要的信息如下
+```javascript
+{
+             class: 'xx班',
+    admission_date: 'xxxxxx',
+           college: 'xxxxx学院',
+             major: '专业',
+    num_of_courses:  5   //所上的课程数
+}
+```
+
+- [ ] `GET /api/info/teacher/:student_id`
+成功状态码：200
+失败状态码：204
+需求：依据不同的teacher_id获取其个人信息，需要的信息如下
+```javascript
+{
+           college: 'xxxxx学院',
+    num_of_courses:  5   //所教的课程数
+}
+```
+
+- [ ] `PUT /api/info/userinfo`
+成功状态码：200
+失败状态码：204
+需求：修改user表中的值
+注意：下列的数据最外层可能还嵌套了一层，收到数据后先用console.log看一下，如果不是下列的格式请联系前端
+```javascript
+{
+     user_id:  '',
+   user_name:  '',
+      gender:  2 (可能是string类型),
+       email:  ''(可能是null),
+       phone:  ''(可能是null)
+}
+```
+
+- [ ] `POST /api/info/userinfo`
+成功状态码：200
+失败状态码：204
+需求：所给的数据如下，请参考登录部分代码如何使用
+```javascript
+ var userinfo = btoa(JSON.stringify({
+                         user_id:   localStorage.getItem('user_id'),
+                        password:   this.form.old_passwd
+                    }));
+```
+
+
+- [ ] `GET /api/info/userinfo`
+成功状态码：200
+失败状态码：204
+需求：检测该密码是否是旧密码，所给的数据如下，请参考登录部分代码如何使用，在mysql中时请使用PASSWORD函数处理
+```javascript
+ var userinfo = btoa(JSON.stringify({
+                         user_id:   localStorage.getItem('user_id'),
+                        password:   this.form.old_passwd
+                    }));
+```
+
+- [ ] `POST /api/info/changePasswd`
+成功状态码：200
+失败状态码：204
+需求：修改给定的user_id的密码，所给的数据如下，请参考登录部分代码如何使用，插入mysql中时请使用PASSWORD函数处理
+```javascript
+var info = JSON.stringify({
+                            user_id: localStorage.getItem('user_id'),
+                           password: this.form.new_passwd1
+                        });
+```

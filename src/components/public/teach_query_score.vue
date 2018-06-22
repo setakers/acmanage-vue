@@ -161,7 +161,7 @@
                     return 'danger';
             },
         },
-        beforeCreate: function(){
+        beforeMount: function(){
             checkLogin(this);
             Axios.get(getApiPath('score/teach_courses/' + localStorage.getItem('teacher_id')))
                 .then((res) => {

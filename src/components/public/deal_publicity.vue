@@ -184,7 +184,7 @@
                 this.currentPage = currentPage;
             }
         },
-        beforeCreate: function(){
+        beforeMount: function(){
             checkLogin(this);
             Axios.get(getApiPath('score/publicity'))
                 .then((res) => {

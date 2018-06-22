@@ -132,12 +132,12 @@
                     type: 'warning'
                 }).then(() => {
                     var which = (this.currentPage - 1 ) * this.pagesize + index;
-                    var changes = JSON.stringify({
+                    var change = JSON.stringify({
                          query_id: query.query_id,
                             state: operation,
                         deal_time: (new Date()).valueOf()
                     });
-                    Axios.put(getApiPath('score/handle_query'), changes )
+                    Axios.put(getApiPath('score/handle_query'), change )
                         .then( (res) => {
                             if(res.status !== 200) {
                                 this.$message({
@@ -162,7 +162,7 @@
                 });
             }
         },
-        beforeCreate: function(){
+        beforeMount: function(){
             checkLogin(this);
             Axios.get(getApiPath('score/score_change_query'))
                 .then((res) => {

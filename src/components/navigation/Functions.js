@@ -9,9 +9,9 @@ export const change_info = {
     path: 'change_info',
     icon: 'el-icon-edit'
 };
-export const change_personal_passwd = {
+export const change_passwd = {
     title: '修改密码',
-    path: 'change_personal_passwd',
+    path: 'change_passwd',
     icon: 'el-icon-setting'
 };
 

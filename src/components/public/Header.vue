@@ -40,7 +40,7 @@
     data: function () {
       //get info from localstorage
       let username = localStorage.getItem('username');
-      let userrole = 'admin';
+      let userrole = 'teacher';
       let system = sys[userrole];
 
       return {

@@ -1,8 +1,8 @@
 import * as funcs from './Functions';
 
 const personal = {
-    student: [ funcs.personal_info, funcs.change_info, funcs.change_personal_passwd ],
-    teacher: [ funcs.personal_info, funcs.change_info, funcs.change_personal_passwd ]
+    student: [ funcs.personal_info, funcs.change_info, funcs.change_passwd ],
+    teacher: [ funcs.personal_info, funcs.change_info, funcs.change_passwd ]
 };
 const select = {
     student: [ funcs.stu_select, funcs.query_course, funcs.personal_table ],
