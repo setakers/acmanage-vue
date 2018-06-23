@@ -156,7 +156,7 @@
                                 if (key === 'major' || key === 'admission_date' || key === 'class')
                                     continue;
                             }
-                            this.tableData.push(
+                            this.selected.push(
                                 {
                                     'key': key,
                                     'value': this.personal_info[key]

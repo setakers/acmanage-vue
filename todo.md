@@ -292,12 +292,14 @@ courses: [
                     {
                     course_id: 456,
                     course_name: 'xxx学',
+                    room_name: 'xxx',
                     credit: 3.5,
                     introduction: '该门课程是关于xxx，将对xxx进行教学',
                     },
                     {
                         course_id: 123,
                         course_name: 'xxx学',
+                        room_name: 'xxx',
                         credit: 3.5,
                         introduction: '该门课程是关于xxx，将对xxx进行教学',
                     }
@@ -314,12 +316,14 @@ selected: [
                     {
                     course_id: 456,
                     course_name: 'xxx学',
+                    room_name: 'xxx',
                     credit: 3.5,
                     introduction: '该门课程是关于xxx，将对xxx进行教学',
                     },
                     {
                         course_id: 123,
                         course_name: 'xxx学',
+                        room_name: 'xxx',
                         credit: 3.5,
                         introduction: '该门课程是关于xxx，将对xxx进行教学',
                     }
@@ -337,6 +341,7 @@ status: [
                     {
                     course_id: 456,
                     course_name: 'xxx学',
+                    room_name: 'xxx',
                     credit: 3.5,
                     introduction: '该门课程是关于xxx，将对xxx进行教学',
                     state: 1
@@ -344,6 +349,7 @@ status: [
                     {
                         course_id: 123,
                         course_name: 'xxx学',
+                        room_name: 'xxx',
                         credit: 3.5,
                         introduction: '该门课程是关于xxx，将对xxx进行教学',
                         state: 0
@@ -363,4 +369,28 @@ status: [
    student_id: localStorage.getItem('student_id'),
         state: 2 //state为2表示待定
 }
+```
+
+- [ ] `GET /api/select/search/:keyword`
+成功状态码：200
+失败状态码：204
+需求: 根据keyword来对所有课程进行模糊匹配
+注意：不为空的时候返回200，为空的时候返回204
+```javascript
+results: [
+                    {
+                    course_id: 456,
+                    course_name: 'xxx学',
+                    room_name: 'xxx',
+                    credit: 3.5,
+                    introduction: '该门课程是关于xxx，将对xxx进行教学',
+                    },
+                    {
+                        course_id: 123,
+                        course_name: 'xxx学',
+                        credit: 3.5,
+                        room_name: 'xxx',
+                        introduction: '该门课程是关于xxx，将对xxx进行教学',
+                    }
+                ],
 ```

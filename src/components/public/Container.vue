@@ -31,7 +31,7 @@
 
       <!--select_sys-->
       <stu_select v-if="  func_path === 'stu_select'" ></stu_select>
-      <select_status v-if=" func_path === 'select_case' "></select_status>
+      <select_status v-if=" func_path === 'select_status' "></select_status>
       <query_course v-if="  func_path === 'query_course' "></query_course>
       <personal_table v-if=" func_path === 'personal_table' "></personal_table>
     </div>
@@ -79,8 +79,9 @@
             Teach_query_score, Query_exam, Stu_query_score, Deal_publicity, Welcome, Personal_info},
         props: ['selected'],
       data: function(){
-          // var role = localStorage.roles;
-          let role = 'student';
+          var role = 'student';
+          // var map = {0: 'student', 1: 'teacher', 2: 'admin'};
+          // let role = map[localStorage.getItem('character')];
 
           return {
             subsys: subsys,

@@ -70,7 +70,7 @@ export default {
           }
           // First, POST the username and password
           var userinfo = btoa(JSON.stringify({
-            user_name:   this.userInfo.id,
+            username:   this.userInfo.id,
             password:   this.userInfo.pass,
             timestamp:  getTimestamp()
           }));
@@ -83,7 +83,7 @@ export default {
                 for(let prop in res.data) {
                   localStorage.setItem(prop, res.data[prop]);
                 }
-                localStorage.setItem('user_name', this.userInfo.id);
+                localStorage.setItem('username', this.userInfo.id);
                 // Set the authorization header
                 Axios.defaults.headers.common['authorization']
                   = localStorage['accessToken'];

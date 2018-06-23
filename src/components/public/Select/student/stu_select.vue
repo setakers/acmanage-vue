@@ -36,6 +36,11 @@
             </el-table-column>
             <el-table-column
                     align="center"
+                    prop="room_name"
+                    label="上课地点">
+            </el-table-column>
+            <el-table-column
+                    align="center"
                     prop="introduction"
                     label="课程简介">
             </el-table-column>
@@ -70,12 +75,14 @@
                     course_id: 456,
                     course_name: 'xxx学',
                     credit: 3.5,
+                    room_name: 'xxx',
                     introduction: '该门课程是关于xxx，将对xxx进行教学',
                     },
                     {
                         course_id: 123,
                         course_name: 'xxx学',
                         credit: 3.5,
+                        room_name: 'xxx',
                         introduction: '该门课程是关于xxx，将对xxx进行教学',
                     }
                 ],
@@ -141,14 +148,14 @@
                             .then(  (res) => {
                                 if(res.status === 200){
                                     var allSelectd = res.data['selected'];
-                                    for( var i =0 ; i < allSelectd.length; i++)
+                                    for( let i =0 ; i < allSelectd.length; i++)
                                         this.selected.push( allSelectd[i].course_id);
 
                                     Axios.get(getApiPath('select/selected_status/' + localStorage.getItem('student_id')))
                                         .then(  (res) => {
                                             if(res.status === 200){
                                                 var status = res.data['status'];
-                                                for( var i =0 ; i < status.length; i++) {
+                                                for( let i =0 ; i < status.length; i++) {
                                                     if( status[i].state === 1 && allSelectd.indexOf(status[i]).course_id === -1){
                                                         this.$notify({
                                                             type: 'warning',
