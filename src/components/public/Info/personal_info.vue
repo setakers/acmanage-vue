@@ -120,10 +120,6 @@
                             }
 
                             for (var key in this.personal_info) {
-                                if (localStorage.getItem('character') === '1') {
-                                    if (key === 'major' || key === 'admission_date' || key === 'class')
-                                        continue;
-                                }
                                 this.tableData.push(
                                     {
                                         'key': key,
@@ -142,7 +138,6 @@
                     });
 
             } else {
-                console.log(456);
                 Axios.get(getApiPath('info/teacher/' + localStorage.getItem('teacher_id')))
                     .then((res) => {
                         if (res.status === 200) {
@@ -151,11 +146,9 @@
                         }
 
                         for (var key in this.personal_info) {
-                            if (localStorage.getItem('character') === '1') {
-                                if (key === 'major' || key === 'admission_date' || key === 'class')
-                                    continue;
-                            }
-                            this.selected.push(
+                            if (key === 'major' || key === 'admission_date' || key === 'class')
+                                continue;
+                            this.tableData.push(
                                 {
                                     'key': key,
                                     'value': this.personal_info[key]
