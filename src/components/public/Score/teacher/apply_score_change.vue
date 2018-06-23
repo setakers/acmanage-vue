@@ -210,18 +210,18 @@
                                 message: '获取教学班信息失败，请检查网络连接'
                             });
                         else {
-                            this.tableData[course_id] = res.data['students'].filter( (item) => item.score !== null );
-                            var pending = this.publicity.filter( (query) => query.state === 2 && query.course_id === parseInt(this.activeName) );
+                            this.$set(this.tableData, course_id, res.data['students'].filter( (item) => item.score !== null ) );
 
+                            var pending = this.publicity.filter( (query) => query.state === 2 && query.course_id === parseInt(this.activeName) );
                             this.tableData[course_id].forEach( (item, index) => {
                                 for( let i in pending){
-                                    var query = this.publicity[i];
+                                    var query = this.pending[i];
                                     if(query.student_id === item.student_id){
-                                        this.tableData[course_id][index].applied = true;
+                                        this.$set(this.tableData[course_id][index], 'applied', true);
                                         return;
                                     }
                                 }
-                                this.tableData[course_id][index].applied = false;
+                                this.$set(this.tableData[course_id][index], 'applied', false);
                             });
                         }
                     })

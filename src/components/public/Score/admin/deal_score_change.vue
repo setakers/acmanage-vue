@@ -145,10 +145,15 @@
                                 this.$message({
                                     type: 'error',
                                     duration: 1500,
-                                    message: '处理成绩修改申请，请检查网络连接'
+                                    message: '处理成绩修改申请失败，请检查网络连接'
                                 });
                             }
                             else {
+                                this.$message({
+                                    type: 'success',
+                                    duration: 1500,
+                                    message: '处理成绩修改申请成功'
+                                });
                                 this.tableData.splice(which, 1);
                             }
                         })

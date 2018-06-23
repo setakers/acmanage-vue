@@ -151,7 +151,7 @@
                                 message: '获取教学班信息失败，请检查网络连接'
                             });
                         else {
-                            this.tableData[course_id] = res.data['students'].filter( (student) => student.score === null);
+                            this.$set(this.tableData, course_id, res.data['students'].filter( (student) => student.score === null) );
                         }
                     })
                     .catch((err) => {
@@ -187,7 +187,7 @@
                             type: 'info'
                         });
                     }
-                    this.tableData[course_id][(this.currentPage - 1) * this.pagesize + table_index].score = null;
+                    this.$set(this.tableData[course_id][(this.currentPage - 1) * this.pagesize + table_index], 'score', null);
                 }
                 else if( parse < 0 || parse >100){
                     this.$notify({
@@ -196,11 +196,12 @@
                         duration: 1500,
                         type: 'info'
                     });
-                    this.tableData[course_id][(this.currentPage - 1) * this.pagesize + table_index].score = null;
+                    this.$set(this.tableData[course_id][(this.currentPage - 1) * this.pagesize + table_index], 'score', null);
                 }
                 else
-                    this.tableData[course_id][(this.currentPage - 1) * this.pagesize + table_index].score = parse;
-                this.courses[course_index].unmarked_stu = this.tableData[course_id].filter((item) => item.score === null).length;
+                    this.$set(this.tableData[course_id][(this.currentPage - 1) * this.pagesize + table_index], 'score', parse);
+
+                this.$set(this.courses[course_index], 'unmarked_stu', this.tableData[course_id].filter((item) => item.score === null).length);
 
                 //console.log(table_index);     //Note: table_index会随页数的改变而改变
             },
@@ -229,10 +230,10 @@
                                 duration: 1500,
                                 message: '成绩录入成功'
                             });
-                            this.tableData[this.activeName] = this.tableData[this.activeName].filter( (item) => item.score === null );
+                            this.$set(this.tableData, this.activeName, this.tableData[this.activeName].filter( (item) => item.score === null ));
                             for( let index in this.courses ){
                                 if( parseInt(this.activeName) === this.courses[index].course_id){
-                                    this.courses[index].unmarked_stu = this.tableData[this.activeName].length;
+                                    this.$set(this.courses[index], 'unmarked_stu', this.tableData[this.activeName].length);
                                     return;
                                 }
                             }

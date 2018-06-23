@@ -137,7 +137,7 @@
                                 message: '获取教学班信息失败，请检查网络连接'
                             });
                         else {
-                            this.tableData[course_id] = res.data['students'];
+                            this.$set(this.tableData, course_id, res.data['students']);
                         }
                     })
                     .catch((err) => {

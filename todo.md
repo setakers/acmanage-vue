@@ -335,7 +335,7 @@ selected: [
 - [ ]  `GET select/selected_status/:student_id`
 成功状态码：200
 失败状态码：204
-需求：从select表中返回该生所有选择的课程,返回的数组命名为'status'
+需求：从select_course表中返回该生所有选择的课程,返回的数组命名为'status'
 ```javascript
 status: [
                     {
@@ -361,7 +361,7 @@ status: [
 - [ ] `POST /api/select/select_course`
 成功状态码：200
 失败状态码：204
-需求：学生选择一门课程，将下面的数据插入到表select中
+需求：学生选择一门课程，将下面的数据插入到表select_course中
 注意：下列的数据最外层可能还嵌套了一层，收到数据后先用console.log看一下，如果不是下列的格式请联系前端
 ```javascript
 {
@@ -454,3 +454,89 @@ open_courses: [
                     },
                 ],
 ```
+
+
+- [ ]  `GET select/all_select_courses`
+成功状态码：200
+失败状态码：204
+需求：从select_course表中返回所有state为2的申请,返回的数组命名为'tableData'
+```javascript
+tableData: [
+            {
+                query_id: 'xx',
+                student_id: 'xx',
+                student_name: '王小虎',
+                course_id: 'xx',
+                course_name: '上海市普陀区金沙江路 1518 弄',
+                teacher_name: 'xx'
+            }
+            ,
+            {
+                query_id: 'xx',
+                student_id: 'xx',
+                student_name: '王小虎',
+                course_id: 'xx',
+                course_name: '上海市普陀区金沙江路 1518 弄',
+                teacher_name: 'xx'
+            }
+        ]
+```
+
+
+
+- [ ]  `PUT select/deal_select`
+成功状态码：200
+失败状态码：204
+需求：根据下面query_id修改其state，如果state为1（即同意选课）则再将course_id和student_id插入到选课中(attend)
+```javascript
+var deal_select = JSON.stringify({
+                          query_id: query.query_id,
+                         course_id: query.course_id,
+                        student_id: query.student_id,
+                             state: operation
+                    });
+
+```
+
+
+
+- [ ]  `GET select/all_open_course`
+成功状态码：200
+失败状态码：204
+需求：从open_course表中返回所有state为2的申请,返回的数组命名为'tableData'
+```javascript
+tableData: [
+            {
+                       open_id: 'xxx',
+                    teacher_id: 'xxx',
+                  teacher_name: 'xxx',
+                   course_name: 'xx',
+                        credit: 3.5,
+                  introduction: 'xxx',
+                  classroom_id: 'xxx',
+                     room_name: 'xxx'
+            }
+        ]
+```
+
+
+
+- [ ]  `PUT select/deal_open_course`
+成功状态码：200
+失败状态码：204
+需求：根据下面open_id修改其state，如果state为1（即同意开课），则先将值插入到course表中（即先建立一个新的course），然后在
+teach表中插入teacher_id和新生成的course_id
+
+```javascript
+var deal_open = JSON.stringify({
+                             open_id: query.open_id,
+                          teacher_id: query.teacher_id,
+                         course_name: query.course_name,
+                              credit: query.credit,
+                        introduction: query.introduction,
+                        classroom_id: query.classroom_id,
+                               state: operation
+                    });
+```
+
+
