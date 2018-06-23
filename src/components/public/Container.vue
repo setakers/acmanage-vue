@@ -63,7 +63,8 @@
         props: ['selected'],
       data: function(){
           // var role = localStorage.roles;
-          let role = 'teacher';
+          var map={0:'student',1:'teacher',2:'admin'};
+          let role = map[localStorage.getItem('character')];
 
           return {
             subsys: subsys,
