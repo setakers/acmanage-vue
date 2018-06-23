@@ -209,7 +209,7 @@ tableData: [
 }
 ```
 
-- [ ] `GET /api/info/stu/:student_id`
+- [ ] `GET /api/info/stu/:student_id` 后端debug通过
 成功状态码：200
 失败状态码：204
 需求：依据不同的student_id获取其个人信息，需要的信息如下
