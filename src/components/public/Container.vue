@@ -30,10 +30,16 @@
       <change_passwd v-if=" func_path === 'change_passwd' "></change_passwd>
 
       <!--select_sys-->
-      <stu_select v-if="  func_path === 'stu_select'" ></stu_select>
-      <select_status v-if=" func_path === 'select_status' "></select_status>
-      <query_course v-if="  func_path === 'query_course' "></query_course>
-      <personal_table v-if=" func_path === 'personal_table' "></personal_table>
+        <!--student-->
+        <stu_select v-if="  func_path === 'stu_select'" ></stu_select>
+        <select_status v-if=" func_path === 'select_status' "></select_status>
+        <query_course v-if="  func_path === 'query_course' "></query_course>
+        <personal_table v-if=" func_path === 'personal_table' "></personal_table>
+        <!--teacher-->
+        <teach_courses v-if=" func_path === 'teach_courses' "></teach_courses>
+        <course_students v-if=" func_path === 'course_students' "></course_students>
+        <apply_course v-if=" func_path === 'apply_course' "></apply_course>
+        <open_course_status v-if=" func_path === 'open_course_status' "></open_course_status>
     </div>
 
     <template v-if=" selected === 'welcome_sys' ">
@@ -63,10 +69,18 @@
     import Select_status from "./Select/student/select_status";
     import Query_course from "./Select/student/query_course";
     import Personal_table from "./Select/student/personal_table";
+    import Teach_courses from "./Select/teacher/teach_courses";
+    import Course_students from "./Select/teacher/course_students";
+    import Apply_course from "./Select/teacher/apply_course";
+    import Open_course_status from "./Select/teacher/open_course_status";
 
     export default {
       name: "Container",
         components: {
+            Open_course_status,
+            Apply_course,
+            Course_students,
+            Teach_courses,
             Personal_table,
             Query_course,
             Select_status,
@@ -79,7 +93,7 @@
             Teach_query_score, Query_exam, Stu_query_score, Deal_publicity, Welcome, Personal_info},
         props: ['selected'],
       data: function(){
-          var role = 'student';
+          var role = 'teacher';
           // var map = {0: 'student', 1: 'teacher', 2: 'admin'};
           // let role = map[localStorage.getItem('character')];
 

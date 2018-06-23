@@ -47,12 +47,18 @@ export const teach_courses = {
 export const apply_course = {
     title: '开课申请',
     path: 'apply_course',
-    icon: 'el-icon—news'
+    icon: 'el-icon-news'
 };
 export const course_students = {
     title: '已选学生',
     path: 'course_students',
     icon: 'el-icon-share'
+};
+export const open_course_status = {
+    title: '开课申请情况',
+    path: 'open_course_status',
+    icon: 'el-icon-star-off'
+
 };
 
 export const deal_select = {

@@ -111,7 +111,6 @@
         beforeMount: function () {
             checkLogin(this);
             if (localStorage.getItem('student_id')!=='null') {
-                console.log('123');
                 Axios.get(getApiPath('info/stu/' + localStorage.getItem('student_id')))
                     .then((res) => {
                         if (res.status === 200) {

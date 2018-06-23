@@ -37,27 +37,24 @@
                     Axios.post(getApiPath('info/userinfo'), {userinfo})
                         .then((res) => {
                             if (res.status === 200) {
-                                return true;
+                                callback();
                             }else
                                 callback( new Error('旧密码不正确'));
                         }).catch( (err) => {
                            callback( new Error('网络连接错误'));
-                           return false;
                     });
                 }
             };
             var validateNew1 = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('请输入新密码'));
-                    return false;
                 }else {
-                    return true;
+                    callback();
                 }
             };
             var validateNew2 = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('请再次输入新密码'));
-                    return false;
                 } else if( this.form.new_passwd1 !== this.form.new_passwd2 ) {
                     this.$notify({
                            title: '警告',
@@ -66,10 +63,10 @@
                             type: 'warning',
                         position: 'top-left'
                     });
-                    return false;
+                    callback(new Error('两次输入的密码不一致'))
 
                 } else{
-                    return true;
+                    callback();
                 }
             };
             return {

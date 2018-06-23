@@ -49,28 +49,26 @@
             };
             var validateEmail = (rule, value, callback) => {
                 if( value === '')
-                    return true;
+                    callback();
                 else{
                     let reg=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]{2,3}){1,2})$/;
                     if( !reg.test(value) ) {
-                        callback("邮箱格式不正确");
-                        return false;
+                        callback(new Error("邮箱格式不正确"));
                     }
                     else
-                        return true;
+                        callback();
                 }
             };
             var validatePhone = (rule, value, callback) => {
                 if( value === '')
-                    return true;
+                    callback();
                 else{
                     let reg=/^1(3|4|5|7|8)\d{9}$/;
                     if( !reg.test(value) ) {
-                        callback("手机号不正确");
-                        return false;
+                        callback(new Error("手机号不正确"));
                     }
                     else
-                        return true;
+                        callback();
                 }
             };
             return {

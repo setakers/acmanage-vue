@@ -375,7 +375,7 @@ status: [
 成功状态码：200
 失败状态码：204
 需求: 根据keyword来对所有课程进行模糊匹配
-注意：不为空的时候返回200，为空的时候返回204
+注意：不为空的时候返回200和数组，为空的时候返回204
 ```javascript
 results: [
                     {
@@ -392,5 +392,65 @@ results: [
                         room_name: 'xxx',
                         introduction: '该门课程是关于xxx，将对xxx进行教学',
                     }
+                ],
+```
+
+- [ ] `GET /api/select/freerooms`
+成功状态码：200
+失败状态码：204
+需求: 返回所有空间教室,空闲教室为不被course表中state为1的课程使用（state为1表示正在进行中，为0表示已结课），返回数组命名为rooms
+注意: 不为空时返回200和数组, 为空时返回204
+```javascript
+room: [
+                    {
+                         classroom_id: 250,
+                         room_name: '东3-200',
+                         capacity: 100
+                    },
+                    {
+                         classroom_id: 251,
+                         room_name: '东3-201',
+                         capacity: 200
+                    }
+                ],
+```
+
+
+- [ ] `POST /api/select/open_course`
+成功状态码：200
+失败状态码：204
+需求: 教师申请开课，将下列数据插入到open_course表中
+```javascript
+var open_info = JSON.stringify({
+                            teacher_id:  localStorage.getItem('teacher_id'),
+                            course_name:  this.form.course_name,
+                            credit:  this.form.credit,
+                            introduction:  this.form.introduction,
+                            classroom_id:  this.form.classroom_id,
+                            state: 2
+                        });
+```
+
+
+- [ ]  `GET select/open_courses_status/:teacher_id`
+成功状态码：200
+失败状态码：204
+需求：从open_course表中返回该教师所有的申请,返回的数组命名为'open_courses'
+```javascript
+open_courses: [
+                    {
+                        course_name:  'xxx',
+                        credit:  3.5,
+                        introduction:  'xxxxxxxxxx',
+                        room_name:  'xxx',
+                        state: 2
+                    },
+                    {
+                        course_name:  'xxx',
+                        credit:  2.0,
+                        introduction:  'asd',
+                        room_name:  'adg',
+                        state: 1
+                    },
                 ],
 ```

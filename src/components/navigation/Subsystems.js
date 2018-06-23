@@ -6,7 +6,7 @@ const personal = {
 };
 const select = {
     student: [ funcs.stu_select, funcs.select_status, funcs.query_course, funcs.personal_table ],
-    teacher: [ funcs.teach_courses, funcs.course_students, funcs.apply_course],
+    teacher: [ funcs.teach_courses, funcs.course_students, funcs.apply_course, funcs.open_course_status],
     admin: [ funcs.deal_select, funcs.deal_course_apply]
 };
 const score = {

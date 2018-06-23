@@ -42,7 +42,7 @@
             let user_name = localStorage.getItem('user_name');
             // var map = {0: 'student', 1: 'teacher', 2: 'admin'};
             // let userrole = map[localStorage.getItem('character')];
-            let userrole = 'student';
+            let userrole = 'teacher';
             let system = sys[userrole];
 
             return {
