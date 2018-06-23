@@ -15,7 +15,7 @@
 - [ ] `GET /api/score/publicity`
 成功状态码：200
 失败状态码：204
-需求：获取score_query表中所有的数据，最终获取到的数据是一个数组，该数组如下, 数组成员每个属性的键名请与下面的范例一样，最后将该数组命名为tableData后返回
+需求：获取score_query表中所有的数据，最终获取到的数据是一个数组，该数组如下, 数组成员每个属性的键名请与下面的范例一样，最后将该数组命名为tableData后返回 后端debug完
 ```javascript
 tableData: [
                {
@@ -40,7 +40,7 @@ tableData: [
 - [ ] `GET /api/score/stuscore/:student_id`
 成功状态码：200
 失败状态码：204
-需求：依据不同的student_id获取其所有课程的成绩，返回数组命名为tableData
+需求：依据不同的student_id获取其所有课程的成绩，返回数组命名为tableData 后端debug完
 ```javascript
 tableData: [
                {
@@ -59,7 +59,7 @@ tableData: [
 - [ ] `GET /api/score/queryexam/:student_id`
 成功状态码：200
 失败状态码：204
-需求：依据不同的student_id获取其所有的考试信息，返回数组命名为tableData
+需求：依据不同的student_id获取其所有的考试信息，返回数组命名为tableData 后端debug完毕
 ```javascript
 tableData: [
                {
@@ -223,7 +223,7 @@ tableData: [
 }
 ```
 
-- [ ] `GET /api/info/teacher/:student_id`
+- [ ] `GET /api/info/teacher/:teacher_id`
 成功状态码：200
 失败状态码：204
 需求：依据不同的teacher_id获取其个人信息，需要的信息如下
