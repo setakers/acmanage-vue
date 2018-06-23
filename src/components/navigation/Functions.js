@@ -22,6 +22,12 @@ export const stu_select = {
     path: 'stu_select',
     icon: 'el-icon-share'
 };
+export const select_status = {
+    title: '选课情况',
+    path: 'select_status',
+    icon: 'el-icon-tickets'
+
+};
 export const query_course = {
     title: '开课查询',
     path: 'query_course',
@@ -32,6 +38,36 @@ export const personal_table = {
     path: 'personal_table',
     icon: 'el-icon-date'
 };
+
+export const teach_courses = {
+    title: '任课情况',
+    path: 'teach_courses',
+    icon: 'el-icon-menu'
+};
+export const apply_course = {
+    title: '开课申请',
+    path: 'apply_course',
+    icon: 'el-icon—news'
+};
+export const course_students = {
+    title: '已选学生',
+    path: 'course_students',
+    icon: 'el-icon-share'
+};
+
+export const deal_select = {
+    title: '选课处理',
+    path: 'deal_select',
+    icon: 'el-icon-star-off'
+};
+export const deal_course_apply = {
+    title: '开课申请处理',
+    path: 'deal_course_apply',
+    icon: 'el-icon-location'
+};
+
+
+
 
 
 
@@ -83,16 +119,6 @@ export const add_edit_class = {
     title: '增改教室',
     path: 'add_edit_class',
     icon: 'el-icon-document'
-};
-export const apply_course = {
-    title: '开课申请',
-    path: 'apply_course',
-    icon: 'el-icon—news'
-};
-export const deal_apply = {
-    title: '开课申请处理',
-    path: 'deal_apply',
-    icon: 'el-icon-location'
 };
 
 

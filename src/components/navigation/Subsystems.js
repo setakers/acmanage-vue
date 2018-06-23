@@ -5,9 +5,9 @@ const personal = {
     teacher: [ funcs.personal_info, funcs.change_info, funcs.change_passwd ]
 };
 const select = {
-    student: [ funcs.stu_select, funcs.query_course, funcs.personal_table ],
-    teacher: [],
-    admin: []
+    student: [ funcs.stu_select, funcs.select_status, funcs.query_course, funcs.personal_table ],
+    teacher: [ funcs.teach_courses, funcs.course_students, funcs.apply_course],
+    admin: [ funcs.deal_select, funcs.deal_course_apply]
 };
 const score = {
     student: [ funcs.deal_publicity, funcs.stu_query_score, funcs.query_exam ],
@@ -15,8 +15,8 @@ const score = {
     admin: [ funcs.deal_publicity, funcs.deal_score_change ]
 };
 const resource = {
-    teacher: [ funcs.apply_course ],
-    admin: [ funcs.add_edit_course, funcs.add_edit_class, funcs.deal_apply]
+    teacher: [ ],
+    admin: [ funcs.add_edit_course, funcs.add_edit_class ]
 };
 const account = {
     admin: [ funcs.add_del_account, funcs.change_role, funcs.query_account ]

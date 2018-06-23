@@ -110,9 +110,9 @@
 </template>
 
 <script>
-    import checkLogin from '../../modules/checkLogin';
+    import checkLogin from '../../../modules/checkLogin';
     import Axios from 'axios';
-    import getApiPath from '../../modules/getApiPath';
+    import getApiPath from '../../../modules/getApiPath';
 
     export default {
         name: 'deal_publicty',

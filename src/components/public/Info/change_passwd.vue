@@ -18,8 +18,8 @@
 </template>
 <script>
 
-    import checkLogin from '../../modules/checkLogin';
-    import getApiPath from '../../modules/getApiPath';
+    import checkLogin from '../../../modules/checkLogin';
+    import getApiPath from '../../../modules/getApiPath';
     import Axios from 'axios';
 
     export default {

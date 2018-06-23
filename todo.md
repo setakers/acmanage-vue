@@ -282,3 +282,85 @@ var info = JSON.stringify({
                            password: this.form.new_passwd1
                         });
 ```
+
+- [ ]  `GET select/query_courses`
+成功状态码：200
+失败状态码：204
+需求：返回所有课程, 返回的数组命名为courses
+```javascript
+courses: [
+                    {
+                    course_id: 456,
+                    course_name: 'xxx学',
+                    credit: 3.5,
+                    introduction: '该门课程是关于xxx，将对xxx进行教学',
+                    },
+                    {
+                        course_id: 123,
+                        course_name: 'xxx学',
+                        credit: 3.5,
+                        introduction: '该门课程是关于xxx，将对xxx进行教学',
+                    }
+                ],
+```
+
+
+- [ ]  `GET select/selected/:student_id`
+成功状态码：200
+失败状态码：204
+需求：从attend表中返回该学生选择的所有课程, 返回的数组命名为'selected'
+```javascript
+selected: [
+                    {
+                    course_id: 456,
+                    course_name: 'xxx学',
+                    credit: 3.5,
+                    introduction: '该门课程是关于xxx，将对xxx进行教学',
+                    },
+                    {
+                        course_id: 123,
+                        course_name: 'xxx学',
+                        credit: 3.5,
+                        introduction: '该门课程是关于xxx，将对xxx进行教学',
+                    }
+                ],
+
+```
+
+
+- [ ]  `GET select/selected_status/:student_id`
+成功状态码：200
+失败状态码：204
+需求：从select表中返回该生所有选择的课程,返回的数组命名为'status'
+```javascript
+status: [
+                    {
+                    course_id: 456,
+                    course_name: 'xxx学',
+                    credit: 3.5,
+                    introduction: '该门课程是关于xxx，将对xxx进行教学',
+                    state: 1
+                    },
+                    {
+                        course_id: 123,
+                        course_name: 'xxx学',
+                        credit: 3.5,
+                        introduction: '该门课程是关于xxx，将对xxx进行教学',
+                        state: 0
+                    }
+                ],
+```
+
+
+- [ ] `POST /api/select/select_course`
+成功状态码：200
+失败状态码：204
+需求：学生选择一门课程，将下面的数据插入到表select中
+注意：下列的数据最外层可能还嵌套了一层，收到数据后先用console.log看一下，如果不是下列的格式请联系前端
+```javascript
+{
+    course_id: course_id,
+   student_id: localStorage.getItem('student_id'),
+        state: 2 //state为2表示待定
+}
+```

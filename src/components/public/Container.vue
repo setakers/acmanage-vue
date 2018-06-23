@@ -28,6 +28,12 @@
       <deal_score_change v-if=" func_path === 'deal_score_change' "></deal_score_change>
       <change_info v-if=" func_path === 'change_info' "></change_info>
       <change_passwd v-if=" func_path === 'change_passwd' "></change_passwd>
+
+      <!--select_sys-->
+      <stu_select v-if="  func_path === 'stu_select'" ></stu_select>
+      <select_status v-if=" func_path === 'select_case' "></select_status>
+      <query_course v-if="  func_path === 'query_course' "></query_course>
+      <personal_table v-if=" func_path === 'personal_table' "></personal_table>
     </div>
 
     <template v-if=" selected === 'welcome_sys' ">
@@ -39,21 +45,32 @@
 
 <script>
     import subsys from '../navigation/Subsystems'
-    import Personal_info from "./personal_info";
+
     import Welcome from "./Welcome";
-    import Deal_publicity from "./deal_publicity";
-    import Stu_query_score from "./stu_query_score";
-    import Query_exam from "./query_exam";
-    import Teach_query_score from "./teach_query_score";
-    import Input_score from "./input_score";
-    import Apply_score_change from "./apply_score_change";
-    import Deal_score_change from "./deal_score_change";
-    import Change_info from "./change_info";
-    import Change_passwd from "./change_passwd";
+
+    import Deal_publicity from "./score/deal_publicity";
+    import Stu_query_score from "./score/student/stu_query_score";
+    import Query_exam from "./score/student/query_exam";
+    import Teach_query_score from "./score/teacher/teach_query_score";
+    import Input_score from "./score/teacher/input_score";
+    import Apply_score_change from "./score/teacher/apply_score_change";
+    import Deal_score_change from "./score/admin/deal_score_change";
+
+    import Personal_info from "./info/personal_info";
+    import Change_info from "./info/change_info";
+    import Change_passwd from "./info/change_passwd";
+    import Stu_select from "./Select/student/stu_select";
+    import Select_status from "./Select/student/select_status";
+    import Query_course from "./Select/student/query_course";
+    import Personal_table from "./Select/student/personal_table";
 
     export default {
       name: "Container",
         components: {
+            Personal_table,
+            Query_course,
+            Select_status,
+            Stu_select,
             Change_passwd,
             Change_info,
             Deal_score_change,
@@ -63,7 +80,7 @@
         props: ['selected'],
       data: function(){
           // var role = localStorage.roles;
-          let role = 'teacher';
+          let role = 'student';
 
           return {
             subsys: subsys,
