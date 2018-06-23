@@ -303,10 +303,10 @@
                 });
             },
             handleTotal(course_id){
-                if( this.tableData[course_id] === null)
+                if( this.tableData[course_id] === undefined)
                     return 0;
                 else
-                    return this.tableData[course.course_id].length;
+                    return this.tableData[course_id].length;
             }
         },
         beforeMount: function(){
