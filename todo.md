@@ -272,7 +272,7 @@ tableData: [
                     }));
 ```
 
-- [ ] `POST /api/info/changePasswd`
+- [ ] `PUT /api/info/changePasswd`
 成功状态码：200
 失败状态码：204
 需求：修改给定的user_id的密码，所给的数据如下，请参考登录部分代码如何使用，插入mysql中时请使用PASSWORD函数处理

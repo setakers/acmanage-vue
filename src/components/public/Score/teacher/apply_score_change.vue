@@ -314,7 +314,7 @@
                             message: '获取教学班信息失败，请检查网络连接'
                         });
                     else {
-                        this.courses = res.data['courses'];
+                        this.courses = res.data['tableData'];
                         Axios.get(getApiPath('score/publicity'))
                             .then((res) => {
                                 if(res.status !== 200)

@@ -9,7 +9,7 @@
           <el-input v-model="userInfo.id" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="pass">
-          <el-input v-model="userInfo.pass" type="password" auto-complete="off"></el-input>
+          <el-input @keyup.native.enter="submitForm('loginForm')" v-model="userInfo.pass" type="password" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary button submit" @click="submitForm('loginForm')">登录</el-button>

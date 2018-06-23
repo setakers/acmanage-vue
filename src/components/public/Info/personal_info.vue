@@ -115,7 +115,6 @@
                     .then((res) => {
                         if (res.status === 200) {
                             for (let prop in res.data) {
-                                console.log(prop+" : "+res.data[prop]);
                                 this.personal_info[prop] = res.data[prop];
                             }
 

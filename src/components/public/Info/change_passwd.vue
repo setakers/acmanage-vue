@@ -86,11 +86,11 @@
             onSubmit(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        var info = JSON.stringify({
+                        var info = btoa(JSON.stringify({
                             user_id: localStorage.getItem('user_id'),
                            password: this.form.new_passwd1
-                        });
-                        Axios.put(getApiPath('info/changePasswd'), info)
+                        }));
+                        Axios.put(getApiPath('info/changePasswd'), {info})
                             .then((res) => {
                                 if( res.status === 200)
                                     this.$message({
