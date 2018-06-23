@@ -21,7 +21,7 @@
                                     disable-transitions>课程简介：{{ course.introduction }}
                             </el-tag>
                         </template>
-                        <template v-if=" tableData[course.course_id].length !== 0 ">
+                        <template v-if=" handleTotal(course.course_id) !== 0">
                             <el-pagination
                                     style="text-align: center; padding: 20px 0;"
                                     @size-change="handleSizeChange"
@@ -30,7 +30,7 @@
                                     :page-sizes="[15, 25, 35, 50]"
                                     :page-size="pagesize"
                                     layout="total, sizes, prev, pager, next, jumper"
-                                    :total="tableData[course.course_id].length">
+                                    :total="handleTotal(course.course_id)">
                             </el-pagination>
                             <el-table
                                     align="center"
@@ -154,6 +154,7 @@
                 pagesize: 15,
                 currentPage: 1,
                 activeName: '-1',
+
                 courses: [{
                     course_id: 456,
                     course_name: 'xxx学',
@@ -191,7 +192,6 @@
             handleCurrentChange: function(currentPage){
                 this.currentPage = currentPage;
             },
-
             handleChange(course_id) {
                 if(this.tableData[course_id])
                     return;
@@ -301,6 +301,12 @@
                         return false;
                     }
                 });
+            },
+            handleTotal(course_id){
+                if( this.tableData[course_id] === null)
+                    return 0;
+                else
+                    return this.tableData[course.course_id].length;
             }
         },
         beforeMount: function(){
@@ -315,6 +321,7 @@
                         });
                     else {
                         this.courses = res.data['tableData'];
+
                         Axios.get(getApiPath('score/publicity'))
                             .then((res) => {
                                 if(res.status !== 200)
