@@ -16,18 +16,23 @@
     </div>
 
     <div class="content" v-if=" selected !== 'welcome_sys' ">
+      <!--personal_info_sys-->
       <personal_info v-if=" func_path === 'person_info' "></personal_info>
+      <change_info v-if=" func_path === 'change_info' "></change_info>
+      <change_passwd v-if=" func_path === 'change_passwd' "></change_passwd>
 
       <!--score_sys-->
       <deal_publicity v-if=" func_path === 'deal_publicity' "></deal_publicity>
-      <stu_query_score v-if=" func_path === 'stu_query_score' "></stu_query_score>
-      <query_exam v-if=" func_path === 'query_exam' "></query_exam>
-      <teach_query_score v-if=" func_path === 'teach_query_score' "></teach_query_score>
-      <input_score v-if=" func_path === 'input_score' "></input_score>
-      <apply_score_change v-if=" func_path === 'apply_score_change' "></apply_score_change>
-      <deal_score_change v-if=" func_path === 'deal_score_change' "></deal_score_change>
-      <change_info v-if=" func_path === 'change_info' "></change_info>
-      <change_passwd v-if=" func_path === 'change_passwd' "></change_passwd>
+        <!--student-->
+        <query_exam v-if=" func_path === 'query_exam' "></query_exam>
+        <stu_query_score v-if=" func_path === 'stu_query_score' "></stu_query_score>
+        <!--teacher-->
+        <teach_query_score v-if=" func_path === 'teach_query_score' "></teach_query_score>
+        <input_score v-if=" func_path === 'input_score' "></input_score>
+        <apply_score_change v-if=" func_path === 'apply_score_change' "></apply_score_change>
+        <!--admin-->
+        <deal_score_change v-if=" func_path === 'deal_score_change' "></deal_score_change>
+
 
       <!--select_sys-->
         <!--student-->
@@ -40,6 +45,10 @@
         <course_students v-if=" func_path === 'course_students' "></course_students>
         <apply_course v-if=" func_path === 'apply_course' "></apply_course>
         <open_course_status v-if=" func_path === 'open_course_status' "></open_course_status>
+        <!--admin-->
+        <deal_select v-if=" func_path === 'deal_select' "></deal_select>
+        <deal_course_apply v-if=" func_path === 'deal_course_apply' "></deal_course_apply>
+
     </div>
 
     <template v-if=" selected === 'welcome_sys' ">
@@ -73,10 +82,14 @@
     import Course_students from "./Select/teacher/course_students";
     import Apply_course from "./Select/teacher/apply_course";
     import Open_course_status from "./Select/teacher/open_course_status";
+    import Deal_select from "./Select/admin/deal_select";
+    import Deal_course_apply from "./Select/admin/deal_course_apply";
 
     export default {
       name: "Container",
         components: {
+            Deal_course_apply,
+            Deal_select,
             Open_course_status,
             Apply_course,
             Course_students,
@@ -93,9 +106,9 @@
             Teach_query_score, Query_exam, Stu_query_score, Deal_publicity, Welcome, Personal_info},
         props: ['selected'],
       data: function(){
-          var role = 'teacher';
-          // var map = {0: 'student', 1: 'teacher', 2: 'admin'};
-          // let role = map[localStorage.getItem('character')];
+          // var role = 'admin';
+          var map = {0: 'student', 1: 'teacher', 2: 'admin'};
+          let role = map[localStorage.getItem('character')];
 
           return {
             subsys: subsys,

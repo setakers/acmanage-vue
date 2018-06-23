@@ -40,9 +40,9 @@
         data: function () {
             //get info from localstorage
             let user_name = localStorage.getItem('user_name');
-            // var map = {0: 'student', 1: 'teacher', 2: 'admin'};
-            // let userrole = map[localStorage.getItem('character')];
-            let userrole = 'teacher';
+            var map = {0: 'student', 1: 'teacher', 2: 'admin'};
+            let userrole = map[localStorage.getItem('character')];
+            // let userrole = 'admin';
             let system = sys[userrole];
 
             return {

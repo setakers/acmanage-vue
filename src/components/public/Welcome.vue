@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>This is the user panel!</p>
-    <p style="text-align:left"><b>Username:</b> {{user_name}}</p>
+    <p style="text-align:left"><b>User_name:</b> {{user_name}}</p>
     <p style="text-align:left"><b>User user_id:</b> {{userId}}</p>
     <p style="text-align:left"><b>User character:</b> {{userCharacter}}</p>
     <p style="text-align:left"><b>User gender:</b> {{userGender}}</p>

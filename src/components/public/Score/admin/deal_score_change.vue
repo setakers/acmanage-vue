@@ -35,7 +35,7 @@
                     align="center"
                     prop="old_score"
                     label="旧成绩"
-                    width="100px">
+                    width="80px">
                 <template slot-scope="scope">
                     <el-tag
                             :type="'primary'"
@@ -47,7 +47,7 @@
                     align="center"
                     prop="new_score"
                     label="新成绩"
-                    width="100px">
+                    width="80px">
                 <template slot-scope="scope">
                     <el-tag
                             :type="'success'"
@@ -69,10 +69,12 @@
             </el-table-column>
             <el-table-column
                     align="center"
-                    label="操作">
+                    label="操作"
+                    width="150px"
+                    >
                 <template slot-scope="scope">
-                    <el-button @click="handle(1, scope.row, scope.$index)"  type="success" plain>同意</el-button>
-                    <el-button @click="handle(0, scope.row, scope.$index)"  type="danger" plain>拒绝</el-button>
+                    <el-button size="small" @click="handle(1, scope.row, scope.$index)"  type="success" plain>同意</el-button>
+                    <el-button size="small" @click="handle(0, scope.row, scope.$index)"  type="danger" plain>拒绝</el-button>
                 </template>
             </el-table-column>
         </el-table>
