@@ -17,58 +17,63 @@
                     disable-transitions>Refused
             </el-tag>
         </div>
-        <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="currentPage"
-                :page-sizes="[10, 15, 25, 50]"
-                :page-size="pagesize"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="open_courses.length">
-        </el-pagination>
-        <el-table
-                :row-class-name="tableRowClassName"
-                align="center"
-                :data="open_courses.slice((currentPage-1)*pagesize,currentPage*pagesize)"
-                style="width: 100%"
-        >
-            <el-table-column align="center" type="index"></el-table-column>
-            <el-table-column
+        <div v-loading="loading"
+             element-loading-text="拼命加载中"
+             element-loading-spinner="el-icon-loading"
+             element-loading-background="rgba(0, 0, 0, 0.8)">
+            <el-pagination
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+                    :current-page="currentPage"
+                    :page-sizes="[10, 15, 25, 50]"
+                    :page-size="pagesize"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="open_courses.length">
+            </el-pagination>
+            <el-table
+                    :row-class-name="tableRowClassName"
                     align="center"
-                    prop="course_name"
-                    label="课程名">
-            </el-table-column>
-            <el-table-column
-                    align="center"
-                    prop="credit"
-                    label="学分">
-            </el-table-column>
-            <el-table-column
-                    align="center"
-                    prop="room_name"
-                    label="上课地点">
-            </el-table-column>
-            <el-table-column
-                    align="center"
-                    prop="introduction"
-                    label="课程介绍"
-                    min-width="150px">
-            </el-table-column>
-            <el-table-column
-                    align="center"
-                    prop="state"
-                    label="处理状态"
-                    :filters="[{ text: 'refused', value: 0 }, { text: 'accept', value: 1 }, { text: 'pending', value: 2 }]"
-                    :filter-method="filterState"
-                    filter-placement="bottom-end">
-                <template slot-scope="scope">
-                    <el-tag
-                            :type="handleState(scope.row.state)"
-                            disable-transitions>{{ formatter(scope.row.state) }}
-                    </el-tag>
-                </template>
-            </el-table-column>
-        </el-table>
+                    :data="open_courses.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                    style="width: 100%"
+            >
+                <el-table-column align="center" type="index"></el-table-column>
+                <el-table-column
+                        align="center"
+                        prop="course_name"
+                        label="课程名">
+                </el-table-column>
+                <el-table-column
+                        align="center"
+                        prop="credit"
+                        label="学分">
+                </el-table-column>
+                <el-table-column
+                        align="center"
+                        prop="room_name"
+                        label="上课地点">
+                </el-table-column>
+                <el-table-column
+                        align="center"
+                        prop="introduction"
+                        label="课程介绍"
+                        min-width="150px">
+                </el-table-column>
+                <el-table-column
+                        align="center"
+                        prop="state"
+                        label="处理状态"
+                        :filters="[{ text: 'refused', value: 0 }, { text: 'accept', value: 1 }, { text: 'pending', value: 2 }]"
+                        :filter-method="filterState"
+                        filter-placement="bottom-end">
+                    <template slot-scope="scope">
+                        <el-tag
+                                :type="handleState(scope.row.state)"
+                                disable-transitions>{{ formatter(scope.row.state) }}
+                        </el-tag>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
     </div>
 </template>
 
@@ -83,29 +88,8 @@
             return {
                 pagesize: 10,
                 currentPage: 1,
-                open_courses: [
-                    {
-                        course_name:  'xxx',
-                        credit:  3.5,
-                        introduction:  'xxxxxxxxxx',
-                        room_name:  'xxx',
-                        state: 2
-                    },
-                    {
-                        course_name:  'xxx',
-                        credit:  2.0,
-                        introduction:  'asd',
-                        room_name:  'adg',
-                        state: 1
-                    },
-                    {
-                        course_name:  'xxax',
-                        credit:  2.0,
-                        introduction:  'asdasd',
-                        room_name:  'adgasd',
-                        state: 0
-                    }
-                ],
+                open_courses: [ ],
+                loading: false
             }
         },
         methods: {
@@ -147,6 +131,7 @@
         },
         beforeMount: function(){
             checkLogin(this);
+            this.loading = true;
             Axios.get(getApiPath('select/open_courses_status/' + localStorage.getItem('teacher_id')))
                 .then((res) => {
                     if(res.status !== 200)
@@ -158,13 +143,16 @@
                     else {
                         this.open_courses = res.data['open_courses'];
                     }
+
+                    this.loading = false;
                 })
-                .catch((err) => {
+                .catch(() => {
                     this.$message({
                         type: 'error',
                         duration: 1500,
                         message: '获取申请开课情况失败，请检查网络连接'
                     });
+                    this.loading = false;
                 });
         }
     }
