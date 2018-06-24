@@ -10,7 +10,7 @@
             <el-form-item label="课程简介" prop="introduction">
                 <el-input v-model="form.introduction"></el-input>
             </el-form-item>
-            <el-form-item label="性别" prop="classroom_id">
+            <el-form-item label="教室" prop="classroom_id">
                 <el-select v-model="form.classroom_id" placeholder="选择教室">
                     <template v-for=" room in rooms">
                         <el-option :label=" room.room_name + ' ---- 容量:' + room.capacity " :value='room.classroom_id'></el-option>
@@ -142,7 +142,7 @@
         beforeMount: function() {
             checkLogin(this);
 
-            Axios.get(getApiPath("select/freerooms"))
+            Axios.get(getApiPath("select/free_rooms"))
                 .then(　(res) => {
                     if(res.status === 200)
                         this.rooms = res.data['rooms'];

@@ -1,6 +1,10 @@
 <template>
     <div class="personal_table">
-        <el-card class="box-card">
+        <el-card class="box-card"
+                 v-loading="loading"
+                 element-loading-text="拼命加载中"
+                 element-loading-spinner="el-icon-loading"
+                 element-loading-background="rgba(0, 0, 0, 0.8)">
             <div slot="header" class="clearfix">
                 <h2>您当前一共有&nbsp;{{ courses.length }}&nbsp;门课程</h2>
             </div>
@@ -53,11 +57,13 @@
         name: "personal_table",
         data(){
             return {
-                courses: [ ]
+                courses: [ ],
+                loading: false
             }
         },
         beforeMount: function(){
             checkLogin(this);
+            this.loading = true;
             Axios.get(getApiPath('select/selected/' + localStorage.getItem('student_id')))
                 .then((res) => {
                     if(res.status !== 200)
@@ -69,6 +75,8 @@
                     else {
                         this.courses = res.data['selected'];
                     }
+
+                    this.loading = false;
                 })
                 .catch((err) => {
                     this.$message({
@@ -76,6 +84,7 @@
                         duration: 1500,
                         message: '获取选课情况失败，请检查网络连接'
                     });
+                    this.loading = false;
                 });
         }
     }

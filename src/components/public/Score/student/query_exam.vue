@@ -1,5 +1,9 @@
 <template>
-    <div class="query_exam">
+    <div class="query_exam"
+         v-loading="loading"
+         element-loading-text="拼命加载中"
+         element-loading-spinner="el-icon-loading"
+         element-loading-background="rgba(0, 0, 0, 0.8)">
         <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
@@ -52,8 +56,8 @@
             return {
                 pagesize: 5,
                 currentPage: 1,
-                tableData: [
-                ]
+                tableData: [ ],
+                loading: false
             }
         },
         methods: {
@@ -67,7 +71,8 @@
         },
         beforeMount: function(){
             checkLogin(this);
-            Axios.get(getApiPath('score/queryexam/' + localStorage.getItem('student_id')))
+            this.loading = true;
+            Axios.get(getApiPath('score/query_exam/' + localStorage.getItem('student_id')))
                 .then((res) => {
                     if(res.status !== 200)
                         this.$message({
@@ -78,13 +83,17 @@
                     else {
                         this.tableData = res.data['tableData'];
                     }
+
+                    this.loading = false;
                 })
-                .catch((err) => {
+                .catch(() => {
                     this.$message({
                         type: 'error',
                         duration: 1500,
                         message: '获取考试信息失败，请检查网络连接'
                     });
+
+                    this.loading = false;
                 });
         }
     }
