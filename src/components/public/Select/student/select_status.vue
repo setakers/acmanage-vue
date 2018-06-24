@@ -88,24 +88,7 @@
             return {
                 pagesize: 10,
                 currentPage: 1,
-                selected: [
-                    {
-                        course_id: 456,
-                        course_name: 'xxx学',
-                        room_name: 'xxx',
-                        credit: 3.5,
-                        introduction: '该门课程是关于xxx，将对xxx进行教学',
-                        state: 1
-                    },
-                    {
-                        course_id: 123,
-                        course_name: 'xxx学',
-                        room_name: 'xxx',
-                        credit: 3.5,
-                        introduction: '该门课程是关于xxx，将对xxx进行教学',
-                        state: 0
-                    }
-                ],
+                selected: [ ],
             }
         },
         methods: {

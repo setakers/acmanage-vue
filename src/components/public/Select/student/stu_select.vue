@@ -75,22 +75,7 @@
                 currentPage: 1,
                 pagesize: 15,
                 loading: false,
-                courses: [
-                    {
-                    course_id: 456,
-                    course_name: 'xxx学',
-                    credit: 3.5,
-                    room_name: 'xxx',
-                    introduction: '该门课程是关于xxx，将对xxx进行教学',
-                    },
-                    {
-                        course_id: 123,
-                        course_name: 'xxx学',
-                        credit: 3.5,
-                        room_name: 'xxx',
-                        introduction: '该门课程是关于xxx，将对xxx进行教学',
-                    }
-                ],
+                courses: [ ],
                 selected: [ 456 ]
             };
         },

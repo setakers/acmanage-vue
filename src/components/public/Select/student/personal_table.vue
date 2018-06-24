@@ -53,27 +53,12 @@
         name: "personal_table",
         data(){
             return {
-                courses: [
-                    {
-                        course_id: 456,
-                        course_name: 'xxx学',
-                        credit: 3.5,
-                        room_name: 'xxx',
-                        introduction: '该门课程是关于xxx，将对xxx进行教学',
-                    },
-                    {
-                        course_id: 123,
-                        course_name: 'xxx学',
-                        credit: 3.5,
-                        room_name: 'xxx',
-                        introduction: '该门课程是关于xxx，将对xxx进行教学',
-                    }
-                ]
+                courses: [ ]
             }
         },
         beforeMount: function(){
             checkLogin(this);
-            Axios.get(getApiPath('select/selected' + localStorage.getItem('student_id')))
+            Axios.get(getApiPath('select/selected/' + localStorage.getItem('student_id')))
                 .then((res) => {
                     if(res.status !== 200)
                         this.$message({
