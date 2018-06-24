@@ -38,9 +38,6 @@
         <div id="pie-chart-container">
             <ve-pie id="pie-chart" :data="chartData"></ve-pie>
         </div>
-        <!--<div class="drawtable">-->
-            <!--<div class="chart-error" v-else><h2>没有数据所以统计图表也没得显示啦~</h2></div>-->
-        <!--</div>-->
     </div>
 </template>
 
@@ -126,28 +123,12 @@
         width: 50%;
         vertical-align: center;
     }
-    .myChart{
-        position: relative;
-        float: left;
-        left: -75%;
-    }
-    .chart-error{
-        position: relative;
-        float: left;
-        left: -50%;
-        top: 50%;
-    }
-    .drawtable{
-        position: absolute;
-        float: left;
-        left: 75%;
-    }
     .stu_query_score{
-        padding: 20px;
+        margin: 20px;
     }
     #pie-chart-container {
         position: absolute;
         width: 300px;
-        right: 0;
+        right: 0px;
     }
 </style>

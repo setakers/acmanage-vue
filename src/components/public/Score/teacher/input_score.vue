@@ -1,7 +1,7 @@
 <template>
     <div class="teach-query-score">
         <el-card>
-            <h2>您当前一共有&nbsp;{{ courses.length }}&nbsp;个教学班</h2>
+            <h2>您当前一共有&nbsp;{{ handleLength(courses) }}&nbsp;个教学班</h2>
             <el-collapse v-model="activeName" accordion @change="handleChange">
                 <template v-for="(course, index) of courses">
                     <el-collapse-item :name="course.course_id">
@@ -23,7 +23,7 @@
                                     :status="handleStatus(course)">
                             </el-progress>
                         </template>
-                        <template v-if=" tableData[course.course_id].length !== 0 ">
+                        <template v-if=" handleLength(tableData[course.course_id]) ">
                                 <el-pagination
                                         style="text-align: center; padding: 20px 0;"
                                         @size-change="handleSizeChange"
@@ -32,7 +32,7 @@
                                         :page-sizes="[15, 25, 35, 50]"
                                         :page-size="pagesize"
                                         layout="total, sizes, prev, pager, next, jumper"
-                                        :total="tableData[course.course_id].length">
+                                        :total="handleLength(tableData[course.course_id])">
                                 </el-pagination>
                                 <div style="text-align: right">
                                     <el-button @click=" dialogVisible = true;" type="primary" plain>提交成绩</el-button>
@@ -76,8 +76,7 @@
         <el-dialog
                 title=""
                 :visible.sync="dialogVisible"
-                width="30%"
-            >
+                width="30%">
             <span>确定提交输入的成绩信息？</span>
             <span slot="footer" class="dialog-footer">
             <el-button @click="dialogVisible = false">取 消</el-button>
@@ -100,29 +99,8 @@
                 pagesize: 15,
                 currentPage: 1,
                 activeName: '-1',
-                courses: [{
-                    course_id: 456,
-                    course_name: 'xxx学',
-                    credit: 3.5,
-                    total_students: 5,
-                    unmarked_stu: 3
-                }],
-                tableData: {
-                    456: [{
-                        student_id: 123,
-                        student_name: 'xxx',
-                        score: null,
-                    },{
-                        student_id: 456,
-                        student_name: 'xxx',
-                        score: null,
-                    },
-                        {
-                            student_id: 789,
-                            student_name: 'xxx',
-                            score: null,
-                        }]
-                }
+                courses: [ ],
+                tableData: { }
             };
         },
         methods: {
@@ -133,7 +111,6 @@
             handleCurrentChange: function(currentPage){
                 this.currentPage = currentPage;
             },
-
             handleChange(course_id) {
                 if(this.tableData[course_id])
                     return;
@@ -154,7 +131,7 @@
                             this.$set(this.tableData, course_id, res.data['students'].filter( (student) => student.score === null) );
                         }
                     })
-                    .catch((err) => {
+                    .catch(() => {
                         this.$message({
                             type: 'error',
                             duration: 1500,
@@ -163,6 +140,8 @@
                     });
             },
             countProgress: function(course){
+                console.log(course);
+                console.log('here');
                 var temp = course.total_students - course.unmarked_stu;
                 return Math.round((temp / course.total_students) *100);
             },
@@ -204,6 +183,12 @@
                 this.$set(this.courses[course_index], 'unmarked_stu', this.tableData[course_id].filter((item) => item.score === null).length);
 
                 //Note: table_index会随页数的改变而改变
+            },
+            handleLength( array ){
+              if( array === undefined || array === null )
+                  return 0;
+              else
+                  return array.length;
             },
             handlePost() {
                 this.dialogVisible = false;
@@ -266,10 +251,10 @@
                             message: '获取教学班信息失败，请检查网络连接'
                         });
                     else {
-                        this.courses = res.data['courses'];
+                        this.courses = res.data['tableData'];
                     }
                 })
-                .catch((err) => {
+                .catch(() => {
                     this.$message({
                         type: 'error',
                         duration: 1500,
