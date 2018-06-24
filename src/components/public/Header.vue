@@ -15,16 +15,16 @@
       </template>
 
       <el-menu-item index="42" id="user_setting">
-        <el-dropdown id="dropdown">
+        <el-dropdown id="dropdown" @command="handleCommand">
             <span>
               <img id="user_logo" src="../../assets/mylogo.jpg">
               <a id="user_id">{{ user_name }}</a>
             </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>个人设置</el-dropdown-item>
-            <el-dropdown-item>修改资料</el-dropdown-item>
+            <el-dropdown-item disabled>个人设置</el-dropdown-item>
+            <el-dropdown-item disabled>修改资料</el-dropdown-item>
             <el-dropdown-item disabled>暂无移动端</el-dropdown-item>
-            <el-dropdown-item divided>安全退出</el-dropdown-item>
+            <el-dropdown-item divided command="logout">安全退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-menu-item>
@@ -34,6 +34,7 @@
 
 <script>
     import sys from '../navigation/Navigations';
+    import Axios from 'axios';
 
     export default {
         name: 'Header',
@@ -57,6 +58,19 @@
                 key = parseInt(key);
                 if (key !== 41 && key !== 42)
                     this.$emit('selected', this.systems[key].path);
+            },
+            handleCommand(){
+              this.gotoLogin();
+            },
+            gotoLogin(){
+                localStorage.clear();
+                delete Axios.defaults.headers.common['authorization'];
+                this.$message({
+                    type: 'warning',
+                    duration: 3000,
+                    message: '注销成功'
+                });
+                this.$router.push({ name: 'Login' });
             }
         }
     };
