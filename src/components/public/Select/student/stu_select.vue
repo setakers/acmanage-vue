@@ -1,5 +1,9 @@
 <template>
-    <div class="stu_select">
+    <div class="stu_select"
+         v-loading="loading"
+         element-loading-text="拼命加载中"
+         element-loading-spinner="el-icon-loading"
+         element-loading-background="rgba(0, 0, 0, 0.8)">
         <el-pagination
                 style="text-align: center; padding: 20px 0;"
                 @size-change="handleSizeChange"
@@ -70,6 +74,7 @@
             return{
                 currentPage: 1,
                 pagesize: 15,
+                loading: false,
                 courses: [
                     {
                     course_id: 456,
@@ -98,14 +103,10 @@
                 this.currentPage = currentPage;
             },
             handleSelected( course_id ){
-                if( this.selected.indexOf( course_id) !== -1) {
-                    return true;
-                }
-                else
-                    return false;
+                return this.selected.indexOf( course_id ) !== -1;
             },
             handleClick(course_id){
-                var select = {
+                const select = {
                     course_id: course_id,
                    student_id: localStorage.getItem('student_id'),
                         state: 2
@@ -128,7 +129,7 @@
                             });
                         }
                     })
-                    .catch( (err) => {
+                    .catch( () => {
                         this.$message({
                               type: 'error',
                           duration: 1500,
@@ -140,6 +141,7 @@
         beforeMount: function(){
             checkLogin(this);
 
+            this.loading = true;
             Axios.get(getApiPath('select/query_courses'))
                 .then((res) => {
                     if(res.status === 200){
@@ -147,14 +149,14 @@
                         Axios.get(getApiPath('select/selected/' + localStorage.getItem('student_id')))
                             .then(  (res) => {
                                 if(res.status === 200){
-                                    var allSelectd = res.data['selected'];
+                                    const allSelectd = res.data['selected'];
                                     for( let i =0 ; i < allSelectd.length; i++)
                                         this.selected.push( allSelectd[i].course_id);
 
                                     Axios.get(getApiPath('select/selected_status/' + localStorage.getItem('student_id')))
                                         .then(  (res) => {
                                             if(res.status === 200){
-                                                var status = res.data['status'];
+                                                const status = res.data['status'];
                                                 for( let i =0 ; i < status.length; i++) {
                                                     if( status[i].state === 1 && allSelectd.indexOf(status[i]).course_id === -1){
                                                         this.$notify({
@@ -175,6 +177,9 @@
                                                     message: '获取已选课程失败，请检查网络连接'
                                                 });
                                             }
+
+                                            this.loading = false;
+
                                         });
                                 }
                                 else{
@@ -184,13 +189,18 @@
                                         message: '获取已选课程失败，请检查网络连接'
                                     });
                                 }
+
+                                this.loading = false;
+
                             })
-                            .catch( (err) => {
+                            .catch( () => {
                                 this.$message({
                                     type: 'error',
                                     duration: 1500,
                                     message: '获取已选课程失败，请检查网络连接'
                                 });
+                                this.loading = false;
+
                             });
                     }
                     else {
@@ -200,13 +210,15 @@
                             message: '获取课程信息失败，请检查网络连接'
                         });
                     }
+                    this.loading = false;
                 })
-                .catch((err) => {
+                .catch(() => {
                     this.$message({
                         type: 'error',
                         duration: 1500,
                         message: '获取课程信息失败，请检查网络连接'
                     });
+                    this.loading = false;
                 });
         }
     }
