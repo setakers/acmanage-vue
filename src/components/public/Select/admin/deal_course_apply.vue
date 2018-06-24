@@ -139,7 +139,7 @@
                                 this.tableData.splice(which, 1);
                             }
                         })
-                        .catch( (err) => {
+                        .catch( () => {
                             this.$message({
                                 type: 'error',
                                 duration: 1500,
@@ -162,15 +162,10 @@
                             message: '获取所有开课申请失败，请检查网络连接'
                         });
                     else {
-                        this.$message({
-                            type: 'success',
-                            duration: 1500,
-                            message: '处理开课申请成功'
-                        });
                         this.tableData = res.data['tableData'];
                     }
                 })
-                .catch((err) => {
+                .catch(() => {
                     this.$message({
                         type: 'error',
                         duration: 1500,

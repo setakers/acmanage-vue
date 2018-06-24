@@ -104,7 +104,6 @@
                 this.currentPage = currentPage;
             },
             handle(operation, query, index) {
-                console.log(query);
                 this.$confirm( operation === 1 ? '此操作将接受该修改申请, 是否继续?':'此操作将拒绝该修改申请, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',

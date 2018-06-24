@@ -1,7 +1,7 @@
 <template>
     <div class="teach-query-score">
         <el-card>
-            <h2>您当前一共有&nbsp;{{ courses.length }}&nbsp;个教学班</h2>
+            <h2>您当前一共有&nbsp;{{ handleLength() }}&nbsp;个教学班</h2>
             <el-collapse v-model="activeName" accordion>
                 <template v-for="(course, index) of courses">
                     <el-collapse-item :name="course.course_id">
@@ -18,7 +18,7 @@
                             </el-tag>
                         </template>
                         <template>
-                            <div style="margin: 10px;">
+                            <div style="margin: 10px; font-size: 1.5em">
                                  {{ course.introduction }}
                             </div>
                         </template>
@@ -39,13 +39,13 @@
         data() {
             return {
                 activeName: '-1',
-                courses: [{
-                    course_id: 456,
-                    course_name: 'xxx学',
-                    credit: 3.5,
-                    introduction: '该门课程是关于xxx，将对xxx进行教学',
-                }]
+                courses: [ ]
             };
+        },
+        methods: {
+            handleLength(){
+                return this.courses.length;
+            }
         },
         beforeMount: function(){
             checkLogin(this);
@@ -58,7 +58,7 @@
                             message: '获取教学班信息失败，请检查网络连接'
                         });
                     else {
-                        this.courses = res.data['courses'];
+                        this.courses = res.data['tableData'];
                     }
                 })
                 .catch((err) => {
