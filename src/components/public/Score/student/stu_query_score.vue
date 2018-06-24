@@ -35,8 +35,10 @@
                 </el-table-column>
             </el-table>
         </div>
+        <div id="pie-chart-container">
+            <ve-pie id="pie-chart" :data="chartData"></ve-pie>
+        </div>
         <!--<div class="drawtable">-->
-            <ve-pie :data="chartData"></ve-pie>
             <!--<div class="chart-error" v-else><h2>没有数据所以统计图表也没得显示啦~</h2></div>-->
         <!--</div>-->
     </div>
@@ -46,7 +48,7 @@
     import checkLogin from '../../../../modules/checkLogin';
     import Axios from 'axios';
     import getApiPath from '../../../../modules/getApiPath';
-
+    
     export default {
         name: "stu_query_score",
         data () {
@@ -56,7 +58,7 @@
                 tableData: [],
                 chartData: {
                     columns: ['分数段', '数量'],
-                    row: [
+                    rows: [
                         {'分数段': '95-100', '数量': 0},
                         {'分数段': '85-94', '数量': 1},
                         {'分数段': '75-84', '数量': 2},
@@ -142,5 +144,10 @@
     }
     .stu_query_score{
         padding: 20px;
+    }
+    #pie-chart-container {
+        position: absolute;
+        width: 300px;
+        right: 0;
     }
 </style>
