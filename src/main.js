@@ -5,7 +5,7 @@ import Vue from 'vue';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 //Echarts
-import echarts from 'echarts'
+import VCharts from 'v-charts'
 // Vue application
 import App from './App';
 // Routing
@@ -13,12 +13,14 @@ import router from './router';
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
-Vue.prototype.$echarts = echarts
+Vue.use(VCharts);
+
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
-})
+  template: '<App/>',
+    render: h => h(App)
+});

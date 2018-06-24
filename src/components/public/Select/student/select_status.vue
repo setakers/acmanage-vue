@@ -17,7 +17,10 @@
                     disable-transitions>Refused
             </el-tag>
         </div>
-        <el-pagination
+        <div v-loading="loading"
+                element-loading-text="拼命加载中"
+                element-loading-spinner="el-icon-loading">
+            <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
                 :current-page="currentPage"
@@ -26,7 +29,7 @@
                 layout="total, sizes, prev, pager, next, jumper"
                 :total="selected.length">
         </el-pagination>
-        <el-table
+            <el-table
                 :row-class-name="tableRowClassName"
                 align="center"
                 :data="selected.slice((currentPage-1)*pagesize,currentPage*pagesize)"
@@ -74,6 +77,7 @@
                 </template>
             </el-table-column>
         </el-table>
+        </div>
     </div>
 </template>
 
@@ -89,6 +93,7 @@
                 pagesize: 10,
                 currentPage: 1,
                 selected: [ ],
+                loading: false
             }
         },
         methods: {
@@ -130,6 +135,7 @@
         },
         beforeMount: function(){
             checkLogin(this);
+            this.loading = true;
             Axios.get(getApiPath('select/selected_status/' + localStorage.getItem('student_id')))
                 .then((res) => {
                     if(res.status !== 200)
@@ -141,13 +147,16 @@
                     else {
                         this.selected = res.data['status'];
                     }
+
+                    this.loading = false;
                 })
-                .catch((err) => {
+                .catch(() => {
                     this.$message({
                         type: 'error',
                         duration: 1500,
                         message: '获取选课情况失败，请检查网络连接'
                     });
+                    this.loading = false;
                 });
         }
     }

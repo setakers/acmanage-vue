@@ -76,7 +76,7 @@
                 pagesize: 15,
                 loading: false,
                 courses: [ ],
-                selected: [ 456 ]
+                selected: [ ]
             };
         },
         methods: {

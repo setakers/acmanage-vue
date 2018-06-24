@@ -35,10 +35,10 @@
                 </el-table-column>
             </el-table>
         </div>
-        <div class="drawtable">
-            <div class="myChart" :style="{width: '300px', height: '300px'}" v-if=" tableData.length !==0"></div>
-            <div class="chart-error" v-else><h2>没有数据所以统计图表也没得显示啦~</h2></div>
-        </div>
+        <!--<div class="drawtable">-->
+            <ve-pie :data="chartData"></ve-pie>
+            <!--<div class="chart-error" v-else><h2>没有数据所以统计图表也没得显示啦~</h2></div>-->
+        <!--</div>-->
     </div>
 </template>
 
@@ -53,7 +53,17 @@
             return {
                 pagesize: 5,
                 currentPage: 1,
-                tableData: []
+                tableData: [],
+                chartData: {
+                    columns: ['分数段', '数量'],
+                    row: [
+                        {'分数段': '95-100', '数量': 0},
+                        {'分数段': '85-94', '数量': 1},
+                        {'分数段': '75-84', '数量': 2},
+                        {'分数段': '60-74', '数量': 3},
+                        {'分数段': '0-59-100', '数量': 4},
+                    ]
+                }
             }
         },
         computed: {
@@ -73,59 +83,7 @@
                 this.tableData.filter((item) => item.score < 60).length;
             }
         },
-        activated(){
-            this.drawLine();
-        },
         methods: {
-            drawLine(){
-                // 基于准备好的dom，初始化echarts实例
-                let myChart = this.$echarts.init(document.getElementById('myChart'));
-                // 绘制图表
-                myChart.setOption({
-                    tooltip: {
-                        trigger: 'item',
-                        formatter: "{a} <br/>{b}: {c} ({d}%)"
-                    },
-                    legend: {
-                        orient: 'vertical',
-                        x: 'left',
-                        data:['95-100','85-94','75-84','60-74','0-59']
-                    },
-                    series: [
-                        {
-                            name:'访问来源',
-                            type:'pie',
-                            radius: ['50%', '70%'],
-                            avoidLabelOverlap: false,
-                            label: {
-                                normal: {
-                                    show: false,
-                                    position: 'center'
-                                },
-                                emphasis: {
-                                    show: true,
-                                    textStyle: {
-                                        fontSize: '30',
-                                        fontWeight: 'bold'
-                                    }
-                                }
-                            },
-                            labelLine: {
-                                normal: {
-                                    show: false
-                                }
-                            },
-                            data:[
-                                {value:this.count_95(), name:'95-100'},
-                                {value:this.count_85(), name:'85-94'},
-                                {value:this.count_75(), name:'75-84'},
-                                {value:this.count_60(), name:'60-74'},
-                                {value:this.count_gg(), name:'0-59'}
-                            ]
-                        }
-                    ]
-                });
-            },
             //used for paging
             handleSizeChange: function (size) {
                 this.pagesize = size;
@@ -148,7 +106,7 @@
                         this.tableData = res.data['tableData'];
                     }
                 })
-                .catch((err) => {
+                .catch(() => {
                     this.$message({
                         type: 'error',
                         duration: 1500,
