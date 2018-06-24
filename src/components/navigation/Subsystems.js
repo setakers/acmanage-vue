@@ -17,10 +17,10 @@ const score = {
 const resource = {
     student: [ funcs.rent_course_publicity, funcs.rent_course ],
     teacher: [ funcs.rent_course_publicity, funcs.rent_course ],
-    admin: [ funcs.rent_course_publicity, funcs.manage_courses, funcs.manage_classrooms, funcs.deal_course_rent]
+    admin: [ funcs.manage_courses, funcs.manage_classrooms, funcs.rent_course_publicity, funcs.deal_course_rent]
 };
 const account = {
-    admin: [ funcs.manage_accounts, funcs.change_role, funcs.query_account]
+    admin: [ funcs.manage_accounts, funcs.query_account, funcs.change_role ]
 };
 
 //保持结构完整

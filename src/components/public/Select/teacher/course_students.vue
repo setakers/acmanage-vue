@@ -34,13 +34,13 @@
                                         @current-change="handleCurrentChange"
                                         :current-page="currentPage"
                                         :page-sizes="[15, 25, 35, 50]"
-                                        :page-size="pagesize"
+                                        :page-size="page_size"
                                         layout="total, sizes, prev, pager, next, jumper"
                                         :total="handleLength(tableData[course.course_id])">
                                 </el-pagination>
                                 <el-table
                                         align="center"
-                                        :data="tableData[course.course_id].slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                                        :data="tableData[course.course_id].slice((currentPage-1)*page_size,currentPage*page_size)"
                                         style="width: 100%; font-size: 1.2em"
                                         border
                                         stripe
@@ -78,7 +78,7 @@
         name: "course_students",
         data() {
             return {
-                pagesize: 15,
+                page_size: 15,
                 currentPage: 1,
                 activeName: '-1',
                 courses: [ ],
@@ -90,7 +90,7 @@
         methods: {
             //used for paging
             handleSizeChange: function (size) {
-                this.pagesize = size;
+                this.page_size = size;
             },
             handleCurrentChange: function(currentPage){
                 this.currentPage = currentPage;
@@ -102,7 +102,7 @@
                     return;
 
                 this.loading = true;
-                this.pagesize = 15;
+                this.page_size = 15;
                 this.currentPage = 1;
 
                 Axios.get(getApiPath('score/stu_of_course/' + course_id))

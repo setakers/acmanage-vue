@@ -6,14 +6,14 @@
                     @current-change="handleCurrentChange"
                     :current-page="currentPage"
                     :page-sizes="[5, 10, 15, 20]"
-                    :page-size="pagesize"
+                    :page-size="page_size"
                     layout="total, sizes, prev, pager, next, jumper"
                     :total="tableData.length">
             </el-pagination>
             <el-table
                     stripe
                     align="center"
-                    :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                    :data="tableData.slice((currentPage-1)*page_size,currentPage*page_size)"
                     style="width: 100%">
                 <el-table-column align="center" type="index"></el-table-column>
                 <el-table-column
@@ -50,42 +50,34 @@
         name: "stu_query_score",
         data () {
             return {
-                pagesize: 5,
+                page_size: 5,
                 currentPage: 1,
                 tableData: [],
                 chartData: {
                     columns: ['分数段', '数量'],
-                    rows: [
-                        {'分数段': '95-100', '数量': 0},
-                        {'分数段': '85-94', '数量': 1},
-                        {'分数段': '75-84', '数量': 2},
-                        {'分数段': '60-74', '数量': 3},
-                        {'分数段': '0-59-100', '数量': 4},
-                    ]
+                    rows: [ ]
                 }
             }
         },
-        computed: {
+        methods: {
             count_95(){
-                this.tableData.filter((item) => item.score >= 95).length;
+                return this.tableData.filter((item) => item.score >= 95).length;
             },
             count_85(){
-                this.tableData.filter((item) => item.score >= 85 && item.score < 95).length;
+                return this.tableData.filter((item) => item.score >= 85 && item.score < 95).length;
             },
             count_75(){
-                this.tableData.filter((item) => item.score >= 75 && item.score < 85).length;
+                return this.tableData.filter((item) => item.score >= 75 && item.score < 85).length;
             },
             count_60(){
-                this.tableData.filter((item) => item.score >= 60 && item.score < 75).length;
+                return this.tableData.filter((item) => item.score >= 60 && item.score < 75).length;
             },
             count_gg(){
-                this.tableData.filter((item) => item.score < 60).length;
-            }
-        },
-        methods: {
+                return this.tableData.filter((item) => item.score < 60).length;
+            },
             //used for paging
             handleSizeChange: function (size) {
-                this.pagesize = size;
+                this.page_size = size;
             },
             handleCurrentChange: function(currentPage){
                 this.currentPage = currentPage;
@@ -103,6 +95,22 @@
                         });
                     else {
                         this.tableData = res.data['tableData'];
+
+                        const count95 = this.count_95();
+                        const count85 = this.count_85();
+                        const count75 = this.count_75();
+                        const count60 = this.count_60();
+                        const countgg = this.count_gg();
+                        const array = [
+                            {'分数段': '95-100', '数量': count95},
+                            {'分数段': '85-94', '数量': count85},
+                            {'分数段': '75-84', '数量': count75},
+                            {'分数段': '60-74', '数量': count60},
+                            {'分数段': '0-59-100', '数量': countgg},
+                        ];
+
+                        console.log('here');
+                        this.$set(this.chartData, 'rows', array);
                     }
                 })
                 .catch(() => {
@@ -128,7 +136,7 @@
     }
     #pie-chart-container {
         position: absolute;
-        width: 300px;
+        width: 400px;
         right: 0px;
     }
 </style>

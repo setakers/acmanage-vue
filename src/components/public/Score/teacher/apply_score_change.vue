@@ -31,13 +31,13 @@
                       @current-change="handleCurrentChange"
                       :current-page="currentPage"
                       :page-sizes="[15, 25, 35, 50]"
-                      :page-size="pagesize"
+                      :page-size="page_size"
                       layout="total, sizes, prev, pager, next, jumper"
                       :total="handleTotal(course.course_id)">
               </el-pagination>
               <el-table
                       align="center"
-                      :data="tableData[course.course_id].slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                      :data="tableData[course.course_id].slice((currentPage-1)*page_size,currentPage*page_size)"
                       style="width: 100%; font-size: 1.2em"
                       border
                       stripe
@@ -154,7 +154,7 @@
                     reason: [{validator: validateReason, trigger: 'blur'}]
                 },
 
-                pagesize: 15,
+                page_size: 15,
                 currentPage: 1,
                 activeName: '-1',
 
@@ -166,7 +166,7 @@
         methods: {
             //used for paging
             handleSizeChange: function (size) {
-                this.pagesize = size;
+                this.page_size = size;
             },
             handleCurrentChange: function (currentPage) {
                 this.currentPage = currentPage;
@@ -179,7 +179,7 @@
 
                 this.loading = true;
 
-                this.pagesize = 15;
+                this.page_size = 15;
                 this.currentPage = 1;
 
                 Axios.get(getApiPath('score/stu_of_course/' + course_id))
@@ -251,7 +251,7 @@
                         Axios.post(getApiPath('score/add_query_score_change'), query_score)
                             .then((res) => {
                                 if (res.status === 200) {
-                                    const index = (this.currentPage - 1) * this.pagesize + this.formtable.index;
+                                    const index = (this.currentPage - 1) * this.page_size + this.formtable.index;
                                     this.tableData[this.activeName][index].applied = true;
 
                                     this.$message({

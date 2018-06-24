@@ -9,13 +9,13 @@
                 @current-change="handleCurrentChange"
                 :current-page="currentPage"
                 :page-sizes="[5, 10, 15, 20]"
-                :page-size="pagesize"
+                :page-size="page_size"
                 layout="total, sizes, prev, pager, next, jumper"
                 :total="tableData.length">
         </el-pagination>
         <el-table
                 align="center"
-                :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                :data="tableData.slice((currentPage-1)*page_size,currentPage*page_size)"
                 style="width: 100%"
         >
             <el-table-column align="center" type="index"></el-table-column>
@@ -54,7 +54,7 @@
         name: 'query_exam',
         data() {
             return {
-                pagesize: 5,
+                page_size: 5,
                 currentPage: 1,
                 tableData: [ ],
                 loading: false
@@ -63,7 +63,7 @@
         methods: {
             //used for paging
             handleSizeChange: function (size) {
-                this.pagesize = size;
+                this.page_size = size;
             },
             handleCurrentChange: function(currentPage){
                 this.currentPage = currentPage;

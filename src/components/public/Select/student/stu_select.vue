@@ -10,13 +10,13 @@
                 @current-change="handleCurrentChange"
                 :current-page="currentPage"
                 :page-sizes="[15, 25, 35, 50]"
-                :page-size="pagesize"
+                :page-size="page_size"
                 layout="total, sizes, prev, pager, next, jumper"
                 :total="courses.length">
         </el-pagination>
         <el-table
                 align="center"
-                :data="courses.slice((currentPage-1)*pagesize, currentPage*pagesize)"
+                :data="courses.slice((currentPage-1)*page_size, currentPage*page_size)"
                 style="width: 100%;"
                 border
                 stripe
@@ -73,7 +73,7 @@
         data() {
             return{
                 currentPage: 1,
-                pagesize: 15,
+                page_size: 15,
                 loading: false,
                 courses: [ ],
                 selected: [ ]
@@ -82,7 +82,7 @@
         methods: {
             //used for paging
             handleSizeChange: function (size) {
-                this.pagesize = size;
+                this.page_size = size;
             },
             handleCurrentChange: function(currentPage){
                 this.currentPage = currentPage;

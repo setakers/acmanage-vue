@@ -5,13 +5,13 @@
                 @current-change="handleCurrentChange"
                 :current-page="currentPage"
                 :page-sizes="[10, 20, 30, 50]"
-                :page-size="pagesize"
+                :page-size="page_size"
                 layout="total, sizes, prev, pager, next, jumper"
                 :total="tableData.length">
         </el-pagination>
         <el-table
                 align="center"
-                :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                :data="tableData.slice((currentPage-1)*page_size,currentPage*page_size)"
                 style="width: 100%"
                 stripe
                 border>
@@ -69,7 +69,7 @@
         name: 'deal_score_apply',
         data() {
             return {
-                pagesize: 10,
+                page_size: 10,
                 currentPage: 1,
                 tableData: [
                     {
@@ -98,7 +98,7 @@
         methods: {
             //used for paging
             handleSizeChange: function (size) {
-                this.pagesize = size;
+                this.page_size = size;
             },
             handleCurrentChange: function(currentPage){
                 this.currentPage = currentPage;
@@ -110,7 +110,7 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    var which = (this.currentPage - 1 ) * this.pagesize + index;
+                    var which = (this.currentPage - 1 ) * this.page_size + index;
 
                     var deal_open = {
                              open_id: query.open_id,

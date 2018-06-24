@@ -26,14 +26,14 @@
                     @current-change="handleCurrentChange"
                     :current-page="currentPage"
                     :page-sizes="[10, 15, 25, 50]"
-                    :page-size="pagesize"
+                    :page-size="page_size"
                     layout="total, sizes, prev, pager, next, jumper"
                     :total="open_courses.length">
             </el-pagination>
             <el-table
                     :row-class-name="tableRowClassName"
                     align="center"
-                    :data="open_courses.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                    :data="open_courses.slice((currentPage-1)*page_size,currentPage*page_size)"
                     style="width: 100%"
             >
                 <el-table-column align="center" type="index"></el-table-column>
@@ -86,7 +86,7 @@
         name: 'open_course_status',
         data() {
             return {
-                pagesize: 10,
+                page_size: 10,
                 currentPage: 1,
                 open_courses: [ ],
                 loading: false
@@ -123,7 +123,7 @@
 
             //used for paging
             handleSizeChange: function (size) {
-                this.pagesize = size;
+                this.page_size = size;
             },
             handleCurrentChange: function(currentPage){
                 this.currentPage = currentPage;
