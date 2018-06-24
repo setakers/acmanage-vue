@@ -49,6 +49,20 @@
         <deal_select v-if=" func_path === 'deal_select' "></deal_select>
         <deal_course_apply v-if=" func_path === 'deal_course_apply' "></deal_course_apply>
 
+      <!--resource_sys-->
+      <rent_course_publicity v-if=" func_path === 'rent_course_publicity' "></rent_course_publicity>
+        <!--stu_teach-->
+        <rent_course v-if=" func_path === 'rent_course' "></rent_course>
+        <!--admin-->
+        <manage_courses v-if=" func_path === 'manage_courses'"></manage_courses>
+        <manage_classrooms v-if=" func_path === 'manage_classrooms'"></manage_classrooms>
+        <deal_course_rent v-if=" func_path === 'deal_course_rent'"></deal_course_rent>
+
+      <!--account_sys-->
+        <manage_accounts v-if=" func_path === 'manage_accounts' "></manage_accounts>
+        <change_role v-if=" func_path === 'change_role' "></change_role>
+        <query_account v-if=" func_path === 'query_account' "></query_account>
+
     </div>
 
     <template v-if=" selected === 'welcome_sys' ">
@@ -84,10 +98,26 @@
     import Open_course_status from "./Select/teacher/open_course_status";
     import Deal_select from "./Select/admin/deal_select";
     import Deal_course_apply from "./Select/admin/deal_course_apply";
+    import Manage_accounts from "./Account/manage_accounts";
+    import Change_role from "./Account/change_role";
+    import Query_account from "./Account/query_account";
+    import Rent_course from "./Resource/stu_teach/rent_course";
+    import Rent_course_publicity from "./Resource/rent_course_publicity";
+    import Manage_courses from "./Resource/admin/manage_courses";
+    import Manage_classrooms from "./Resource/admin/manage_classrooms";
+    import Deal_course_rent from "./Resource/admin/deal_course_rent";
 
     export default {
       name: "Container",
         components: {
+            Deal_course_rent,
+            Manage_classrooms,
+            Manage_courses,
+            Rent_course_publicity,
+            Rent_course,
+            Query_account,
+            Change_role,
+            Manage_accounts,
             Deal_course_apply,
             Deal_select,
             Open_course_status,
@@ -107,7 +137,7 @@
         props: ['selected'],
       data: function(){
           // var role = 'admin';
-          var map = {0: 'student', 1: 'teacher', 2: 'admin'};
+          let map = {0: 'student', 1: 'teacher', 2: 'admin'};
           let role = map[localStorage.getItem('character')];
 
           return {

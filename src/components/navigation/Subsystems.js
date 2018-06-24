@@ -15,11 +15,12 @@ const score = {
     admin: [ funcs.deal_publicity, funcs.deal_score_change ]
 };
 const resource = {
-    teacher: [ ],
-    admin: [ funcs.add_edit_course, funcs.add_edit_class ]
+    student: [ funcs.rent_course_publicity, funcs.rent_course ],
+    teacher: [ funcs.rent_course_publicity, funcs.rent_course ],
+    admin: [ funcs.rent_course_publicity, funcs.manage_courses, funcs.manage_classrooms, funcs.deal_course_rent]
 };
 const account = {
-    admin: [ funcs.add_del_account, funcs.change_role, funcs.query_account ]
+    admin: [ funcs.manage_accounts, funcs.change_role, funcs.query_account]
 };
 
 //保持结构完整

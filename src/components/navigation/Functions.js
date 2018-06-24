@@ -60,7 +60,6 @@ export const open_course_status = {
     icon: 'el-icon-star-off'
 
 };
-
 export const deal_select = {
     title: '选课处理',
     path: 'deal_select',
@@ -71,10 +70,6 @@ export const deal_course_apply = {
     path: 'deal_course_apply',
     icon: 'el-icon-location'
 };
-
-
-
-
 
 
 //考试与成绩
@@ -116,22 +111,37 @@ export const deal_publicity = {
 
 
 //教学资源管理
-export const add_edit_course = {
-    title: '增改课程',
-    path: 'add_edit_course',
+export const rent_course_publicity = {
+    title: '租借教室公示',
+     path: 'rent_course_publicity',
+     icon: 'el-icon-info'
+};
+export const rent_course = {
+    title: '租借教室',
+    path: 'rent_course',
+    icon: 'el-icon-more'
+};
+export const manage_courses = {
+    title: '课程管理',
+    path: 'manage_courses',
     icon: 'el-icon-tickets'
 };
-export const add_edit_class = {
-    title: '增改教室',
-    path: 'add_edit_class',
+export const manage_classrooms = {
+    title: '教室管理',
+    path: 'manage_classrooms',
     icon: 'el-icon-document'
+};
+export const deal_course_rent = {
+    title: '教室租借审批',
+    path: 'deal_course_rent',
+    icon: 'el-icon-date'
 };
 
 
 //用户账户管理
-export const add_del_account = {
+export const manage_accounts = {
     title: '增删账户',
-    path: 'add_del_account',
+    path: 'add_del_accounts',
     icon: 'el-icon-edit-outline'
 };
 export const change_role = {
