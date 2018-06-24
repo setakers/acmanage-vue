@@ -30,7 +30,7 @@ export default {
   name: "Login",
   data() {
     var validateUser = (rule, value, callback) => {
-      if (value === '') {
+      if (value === '' || value === null || value === undefined) {
         callback(new Error('请输入工号或学号'));
       } else {
         // this should be implemented with a query

@@ -34,14 +34,14 @@
         name: "apply_course",
         data() {
             var validateName = (rule, value, callback) => {
-                if (value === '') {
+                if (value === '' || value === null || value === undefined) {
                     callback(new Error('请输入课程名'));
                 } else {
                     callback();
                 }
             };
             var validateCredit = (rule, value, callback) => {
-                if( value === '')
+                if( value === '' || value === null || value === undefined)
                     callback(new Error('请输入学分'));
                 else{
                     var reg = /^\d+(\.\d+)?$/;
@@ -52,14 +52,14 @@
                 }
             };
             var validateIntro = (rule, value, callback) => {
-                if( value === '')
+                if( value === '' || value === null || value === undefined)
                     callback(new Error('请输入课程简介'));
                 else{
                     callback();
                 }
             };
             var validateRoom = ( rule, value, callback) => {
-                if( value === null || value === '')
+                if( value === '' || value === null || value === undefined)
                     callback(new Error('请选择教室'));
                 else
                     callback();

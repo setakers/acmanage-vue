@@ -141,7 +141,7 @@ export const deal_course_rent = {
 //用户账户管理
 export const manage_accounts = {
     title: '账户管理',
-    path: 'add_del_accounts',
+    path: 'manage_accounts',
     icon: 'el-icon-edit-outline'
 };
 export const change_role = {

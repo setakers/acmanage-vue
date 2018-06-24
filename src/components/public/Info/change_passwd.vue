@@ -26,7 +26,7 @@
         name: "change_passwd",
         data() {
             var validatePasswd = (rule, value, callback) => {
-                if (value === '') {
+                if (value === '' || value === null || value === undefined) {
                     callback(new Error('请输入旧密码'));
                 } else {
                     var userinfo = btoa(JSON.stringify({
@@ -46,14 +46,14 @@
                 }
             };
             var validateNew1 = (rule, value, callback) => {
-                if (value === '') {
+                if (value === '' || value === null || value === undefined) {
                     callback(new Error('请输入新密码'));
                 }else {
                     callback();
                 }
             };
             var validateNew2 = (rule, value, callback) => {
-                if (value === '') {
+                if (value === '' || value === null || value === undefined) {
                     callback(new Error('请再次输入新密码'));
                 } else if( this.form.new_passwd1 !== this.form.new_passwd2 ) {
                     this.$notify({

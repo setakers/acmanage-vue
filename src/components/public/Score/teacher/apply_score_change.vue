@@ -133,7 +133,7 @@
                     callback();
             };
             const validateReason = (rule, value, callback) => {
-                if (value === '') {
+                if (value === '' || value === null || value === undefined) {
                     callback(new Error('申请理由不能为空'));
                 } else {
                     callback();

@@ -33,7 +33,7 @@
         name: "change_info",
         data() {
             var validateUser = (rule, value, callback) => {
-                if (value === '') {
+                if (value === '' || value === null || value === undefined) {
                     callback(new Error('请输入用户名'));
                 } else {
                     // this should be implemented with a query
@@ -48,7 +48,7 @@
                 }
             };
             var validateEmail = (rule, value, callback) => {
-                if( value === '')
+                if( value === ''  || value === null || value === undefined)
                     callback();
                 else{
                     let reg=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]{2,3}){1,2})$/;
@@ -60,7 +60,7 @@
                 }
             };
             var validatePhone = (rule, value, callback) => {
-                if( value === '')
+                if( value === ''  || value === null || value === undefined)
                     callback();
                 else{
                     let reg=/^1(3|4|5|7|8)\d{9}$/;
