@@ -94,13 +94,13 @@
 
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        var info = JSON.stringify({
-                             user_id:  localStorage.getItem('user_id'),
-                           user_name:  this.form.user_name,
-                              gender:  parseInt(this.form.gender),
-                               email:  this.form.email,
-                               phone:  this.form.phone
-                        });
+                        var info = {
+                            user_id: localStorage.getItem('user_id'),
+                            user_name: this.form.user_name,
+                            gender: parseInt(this.form.gender),
+                            email: this.form.email,
+                            phone: this.form.phone
+                        };
 
                         Axios.put(getApiPath('info/userinfo'), info)
                             .then((res) => {

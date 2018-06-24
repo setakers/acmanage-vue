@@ -11,7 +11,6 @@
         <el-table-column
                 prop="key"
                 label="属性"
-                width="350"
                 align="center">
           <template slot-scope="scope">
             <em style="font-size: 1.2em">{{ title(scope.row.key) }}</em>

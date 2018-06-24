@@ -248,7 +248,7 @@
                 this.$refs[scoreForm].validate((valid) => {
                     console.log(valid);
                     if (valid) {
-                        var query_score = JSON.stringify({
+                        var query_score = {
                             query_id: null,
                             teacher_id: localStorage.getItem('teacher_id'),
                             student_id: this.formtable.student.student_id,
@@ -259,8 +259,7 @@
                             state: 2,
                             query_time: null,
                             deal_time: null,
-                        });
-                        console.log(11111);
+                        };
                         Axios.post(getApiPath('score/add_query_score_change'), query_score)
                             .then((res) => {
                                 if (res.status === 200) {

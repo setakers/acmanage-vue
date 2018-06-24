@@ -98,14 +98,14 @@
                 }
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        var open_info = JSON.stringify({
+                        var open_info = {
                             teacher_id:  localStorage.getItem('teacher_id'),
                             course_name:  this.form.course_name,
                             credit:  this.form.credit,
                             introduction:  this.form.introduction,
                             classroom_id:  this.form.classroom_id,
                             state: 2
-                        });
+                        );
 
                         Axios.post(getApiPath('select/open_course'), open_info)
                             .then((res) => {

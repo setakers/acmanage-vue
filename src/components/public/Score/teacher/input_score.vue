@@ -218,10 +218,10 @@
                     return;
                 }
 
-                var input_score = JSON.stringify({
+                var input_score = {
                     course_id:   parseInt(this.activeName),
                        scores:   this.tableData[this.activeName].filter( (item) => item.score !== null )
-                });
+                );
                 Axios.put(getApiPath('score/input_score'), input_score)
                     .then((res) => {
                         if(res.status === 200) {

@@ -112,7 +112,7 @@
                 }).then(() => {
                     var which = (this.currentPage - 1 ) * this.pagesize + index;
 
-                    var deal_open = JSON.stringify({
+                    var deal_open = {
                              open_id: query.open_id,
                           teacher_id: query.teacher_id,
                          course_name: query.course_name,
@@ -120,7 +120,7 @@
                         introduction: query.introduction,
                         classroom_id: query.classroom_id,
                                state: operation
-                    });
+                    };
                     Axios.put(getApiPath('select/deal_open_course'), deal_open )
                         .then( (res) => {
                             if(res.status !== 200) {

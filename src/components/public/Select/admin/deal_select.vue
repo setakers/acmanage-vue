@@ -103,12 +103,12 @@
                 }).then(() => {
                     var which = (this.currentPage - 1 ) * this.pagesize + index;
 
-                    var deal_select = JSON.stringify({
+                    var deal_select = {
                         query_id: query.query_id,
                         course_id: query.course_id,
                         student_id: query.student_id,
                         state: operation
-                    });
+                    };
                     Axios.put(getApiPath('select/deal_select'), deal_select )
                         .then( (res) => {
                             if(res.status !== 200) {

@@ -105,11 +105,11 @@
                     return false;
             },
             handleClick(course_id){
-                var select = JSON.stringify({
+                var select = {
                     course_id: course_id,
                    student_id: localStorage.getItem('student_id'),
                         state: 2
-                });
+                };
                 Axios.post(getApiPath('select/select_course'), select)
                     .then( (res) => {
                         if(res.status === 200){
