@@ -278,6 +278,7 @@
                                         student: {},
                                         index: null
                                     };
+                                    this.dialogVisible = false;
 
                                 } else {
                                     this.$message({
