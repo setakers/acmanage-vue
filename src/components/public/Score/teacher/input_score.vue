@@ -67,7 +67,7 @@
                             </el-table>
                         </template>
                         <template v-else>
-                            <br /><em>该门课程暂时没有选定的学生</em>
+                            <br /><em>该门课程没有未录入成绩的学生</em>
                         </template>
                     </el-collapse-item>
                 </template>
