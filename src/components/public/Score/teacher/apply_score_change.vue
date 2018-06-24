@@ -1,113 +1,113 @@
 <template>
-    <div class="teach-query-score">
-        <el-card>
-            <h2>您当前一共有&nbsp;{{ courses.length }}&nbsp;个教学班</h2>
-            <el-collapse v-model="activeName" accordion @change="handleChange">
-                <template v-for="(course, index) of courses">
-                    <el-collapse-item :name="course.course_id">
-                        <template slot="title">
-                            <a class="header-name">{{ course.course_name }}</a>
-                            <el-tag
-                                    style="margin-left: 20px"
-                                    :type="'success'"
-                                    disable-transitions>课程编号：{{ course.course_id }}
-                            </el-tag>
-                            <el-tag
-                                    :type="'primary'"
-                                    disable-transitions>学分：{{ course.credit }}
-                            </el-tag>
-                            <el-tag
-                                    :type="'info'"
-                                    disable-transitions>课程简介：{{ course.introduction }}
-                            </el-tag>
-                        </template>
-                        <template v-if=" handleTotal(course.course_id) !== 0">
-                            <el-pagination
-                                    style="text-align: center; padding: 20px 0;"
-                                    @size-change="handleSizeChange"
-                                    @current-change="handleCurrentChange"
-                                    :current-page="currentPage"
-                                    :page-sizes="[15, 25, 35, 50]"
-                                    :page-size="pagesize"
-                                    layout="total, sizes, prev, pager, next, jumper"
-                                    :total="handleTotal(course.course_id)">
-                            </el-pagination>
-                            <el-table
-                                    align="center"
-                                    :data="tableData[course.course_id].slice((currentPage-1)*pagesize,currentPage*pagesize)"
-                                    style="width: 100%; font-size: 1.2em"
-                                    border
-                                    stripe
-                            >
-                                <el-table-column width="250px" align="center" type="index"></el-table-column>
-                                <el-table-column
-                                        align="center"
-                                        prop="student_id"
-                                        label="学号">
-                                </el-table-column>
-                                <el-table-column
-                                        align="center"
-                                        prop="student_name"
-                                        label="学生姓名">
-                                </el-table-column>
-                                <el-table-column
-                                        align="center"
-                                        prop="score"
-                                        sortable
-                                        label="成绩">
-                                    <template slot-scope="scope">
-                                        <el-tag
-                                                style="font-size: 1.2em"
-                                                :type="handleScore(scope.row.score)"
-                                                disable-transitions>{{ scope.row.score }}
-                                        </el-tag>
-                                    </template>
-                                </el-table-column>
-                                <el-table-column
-                                        align="center"
-                                        label="操作">
-                                    <template slot-scope="scope">
-                                        <el-button :type=" scope.row.applied?'info':'primary' "
-                                                   :disabled="scope.row.applied"
-                                                   @click=" dialogVisible = true; formtable.student = scope.row; formtable.index = scope.$index "
-                                                   plain> {{ scope.row.applied?'已申请':'申请修改' }}
-                                        </el-button>
-                                    </template>
-                                </el-table-column>
-                            </el-table>
-                        </template>
-                        <template v-else>
-                            <br /><em>该门课程暂时没有选定的学生</em>
-                        </template>
-                    </el-collapse-item>
-                </template>
-            </el-collapse>
-        </el-card>
-        <el-dialog
-                title="成绩修改申请"
-                :visible.sync="dialogVisible"
-                width="30%">
-            <el-form :model="formtable" :rules="checkRules" ref="scoreForm" label-width="75px">
-                <el-form-item label="旧的分数">
-                        <el-tag
-                                style="font-size: 1.2em"
-                                :type="handleScore(formtable.student.score)"
-                                disable-transitions>{{ formtable.student.score }}
-                        </el-tag>
-                </el-form-item>
-                <el-form-item label="新的分数" prop="new_score">
-                    <el-input v-model="formtable.new_score" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="申请理由" prop="reason">
-                    <el-input v-model="formtable.reason" auto-complete="off"></el-input>
-                </el-form-item>
-                <el-form-item style="text-align: right; padding-right: 20px">
-                    <el-button @click="dialogVisible = false">取 消</el-button>
-                    <el-button type="primary" @click="handlePost('scoreForm')">确 定</el-button>
-                </el-form-item>
-            </el-form>
-        </el-dialog>
-    </div>
+  <div class="teach-query-score">
+    <el-card>
+      <h2>您当前一共有&nbsp;{{ courses.length }}&nbsp;个教学班</h2>
+      <el-collapse v-model="activeName" accordion @change="handleChange">
+        <template v-for="(course, index) of courses">
+          <el-collapse-item :name="course.course_id">
+            <template slot="title">
+              <a class="header-name">{{ course.course_name }}</a>
+              <el-tag
+                      style="margin-left: 20px"
+                      :type="'success'"
+                      disable-transitions>课程编号：{{ course.course_id }}
+              </el-tag>
+              <el-tag
+                      :type="'primary'"
+                      disable-transitions>学分：{{ course.credit }}
+              </el-tag>
+              <el-tag
+                      :type="'info'"
+                      disable-transitions>课程简介：{{ course.introduction }}
+              </el-tag>
+            </template>
+            <template v-if=" handleTotal(course.course_id) !== 0">
+              <el-pagination
+                      style="text-align: center; padding: 20px 0;"
+                      @size-change="handleSizeChange"
+                      @current-change="handleCurrentChange"
+                      :current-page="currentPage"
+                      :page-sizes="[15, 25, 35, 50]"
+                      :page-size="pagesize"
+                      layout="total, sizes, prev, pager, next, jumper"
+                      :total="handleTotal(course.course_id)">
+              </el-pagination>
+              <el-table
+                      align="center"
+                      :data="tableData[course.course_id].slice((currentPage-1)*pagesize,currentPage*pagesize)"
+                      style="width: 100%; font-size: 1.2em"
+                      border
+                      stripe
+              >
+                <el-table-column width="250px" align="center" type="index"></el-table-column>
+                <el-table-column
+                        align="center"
+                        prop="student_id"
+                        label="学号">
+                </el-table-column>
+                <el-table-column
+                        align="center"
+                        prop="student_name"
+                        label="学生姓名">
+                </el-table-column>
+                <el-table-column
+                        align="center"
+                        prop="score"
+                        sortable
+                        label="成绩">
+                  <template slot-scope="scope">
+                    <el-tag
+                            style="font-size: 1.2em"
+                            :type="handleScore(scope.row.score)"
+                            disable-transitions>{{ scope.row.score }}
+                    </el-tag>
+                  </template>
+                </el-table-column>
+                <el-table-column
+                        align="center"
+                        label="操作">
+                  <template slot-scope="scope">
+                    <el-button :type=" scope.row.applied?'info':'primary' "
+                               :disabled="scope.row.applied"
+                               @click=" dialogVisible = true; formtable.student = scope.row; formtable.index = scope.$index "
+                               plain> {{ scope.row.applied?'已申请':'申请修改' }}
+                    </el-button>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </template>
+            <template v-else>
+              <br/><em>该门课程暂时没有选定的学生</em>
+            </template>
+          </el-collapse-item>
+        </template>
+      </el-collapse>
+    </el-card>
+    <el-dialog
+            title="成绩修改申请"
+            :visible.sync="dialogVisible"
+            width="30%">
+      <el-form :model="formtable" :rules="checkRules" ref="formtable" label-width="75px">
+        <el-form-item label="旧的分数">
+          <el-tag
+                  style="font-size: 1.2em"
+                  :type="handleScore(formtable.student.score)"
+                  disable-transitions>{{ formtable.student.score }}
+          </el-tag>
+        </el-form-item>
+        <el-form-item label="新的分数" prop="new_score">
+          <el-input v-model="formtable.new_score" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="申请理由" prop="reason">
+          <el-input v-model="formtable.reason" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item style="text-align: right; padding-right: 20px">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="handlePost('formtable')">确 定</el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
+  </div>
 </template>
 
 <script>
@@ -121,20 +121,18 @@
             var validateScore = (rule, value, callback) => {
                 var num = parseInt(value);
 
-                if ( isNaN(num) ) {
+                if (isNaN(num)) {
                     callback(new Error('分数必须是一个数字'));
-                    return false;
-                } else if( num < 0 || num > 100) {
+                } else if (num < 0 || num > 100) {
                     callback(new Error('请输入在0-100之间的分数'));
                 } else
-                    return true;
+                    callback();
             };
             var validateReason = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('申请理由不能为空'));
-                    return false;
                 } else {
-                    return true;
+                    callback();
                 }
             };
             return {
@@ -147,8 +145,8 @@
                     index: null
                 },
                 checkRules: {
-                    new_score: [ { validator: validateScore,  trigger: 'blur' }],
-                       reason: [ { validator: validateReason, trigger: 'blur' }]
+                    new_score: [{validator: validateScore, trigger: 'blur'}],
+                    reason: [{validator: validateReason, trigger: 'blur'}]
                 },
 
                 pagesize: 15,
@@ -168,19 +166,19 @@
                         score: 95,
                         applied: true
                     },
-                    {
-                        student_id: 456,
-                        student_name: 'xxx',
-                        score: 85,
-                        applied: false
-                    },
-                    {
-                        student_id: 789,
-                        student_name: 'xxx',
-                        score: 61,
-                        applied: false
-                    }]
-            },
+                        {
+                            student_id: 456,
+                            student_name: 'xxx',
+                            score: 85,
+                            applied: false
+                        },
+                        {
+                            student_id: 789,
+                            student_name: 'xxx',
+                            score: 61,
+                            applied: false
+                        }]
+                },
                 publicity: []
             };
         },
@@ -189,13 +187,13 @@
             handleSizeChange: function (size) {
                 this.pagesize = size;
             },
-            handleCurrentChange: function(currentPage){
+            handleCurrentChange: function (currentPage) {
                 this.currentPage = currentPage;
             },
             handleChange(course_id) {
-                if(this.tableData[course_id])
+                if (this.tableData[course_id])
                     return;
-                if(course_id === '')
+                if (course_id === '')
                     return;
 
                 this.pagesize = 15;
@@ -203,20 +201,20 @@
 
                 Axios.get(getApiPath('score/stu_of_course/' + course_id))
                     .then((res) => {
-                        if(res.status !== 200)
+                        if (res.status !== 200)
                             this.$message({
                                 type: 'error',
                                 duration: 1500,
                                 message: '获取教学班信息失败，请检查网络连接'
                             });
                         else {
-                            this.$set(this.tableData, course_id, res.data['students'].filter( (item) => item.score !== null ) );
+                            this.$set(this.tableData, course_id, res.data['students'].filter((item) => item.score !== null));
 
-                            var pending = this.publicity.filter( (query) => query.state === 2 && query.course_id === parseInt(this.activeName) );
-                            this.tableData[course_id].forEach( (item, index) => {
-                                for( let i in pending){
+                            var pending = this.publicity.filter((query) => query.state === 2 && query.course_id === parseInt(this.activeName));
+                            this.tableData[course_id].forEach((item, index) => {
+                                for (let i in pending) {
                                     var query = this.pending[i];
-                                    if(query.student_id === item.student_id){
+                                    if (query.student_id === item.student_id) {
                                         this.$set(this.tableData[course_id][index], 'applied', true);
                                         return;
                                     }
@@ -233,22 +231,23 @@
                         });
                     });
             },
-            handleScore(value){
-                if(value >= 90)
+            handleScore(value) {
+                if (value >= 90)
                     return 'success';
-                else if(value >= 80)
+                else if (value >= 80)
                     return 'primary';
-                else if(value >= 70)
+                else if (value >= 70)
                     return 'warning';
-                else if(value >= 60)
+                else if (value >= 60)
                     return 'info';
                 else
                     return 'danger';
             },
-            handlePost( scoreForm ){
+            handlePost(scoreForm) {
+                console.log('in handle post');
                 this.$refs[scoreForm].validate((valid) => {
+                    console.log(valid);
                     if (valid) {
-                        // First, POST the username and password
                         var query_score = JSON.stringify({
                             query_id: null,
                             teacher_id: localStorage.getItem('teacher_id'),
@@ -261,9 +260,10 @@
                             query_time: null,
                             deal_time: null,
                         });
+                        console.log(11111);
                         Axios.post(getApiPath('score/add_query_score_change'), query_score)
                             .then((res) => {
-                                if(res.status === 200) {
+                                if (res.status === 200) {
                                     var index = (this.currentPage - 1) * this.pagesize + this.formtable.index;
                                     this.tableData[this.activeName][index].applied = true;
 
@@ -288,7 +288,7 @@
                                     });
                                     return false;
                                 }
-                            }).catch( (err) => {
+                            }).catch((err) => {
                             this.$message({
                                 type: 'error',
                                 duration: 1500,
@@ -302,18 +302,18 @@
                     }
                 });
             },
-            handleTotal(course_id){
-                if( this.tableData[course_id] === undefined)
+            handleTotal(course_id) {
+                if (this.tableData[course_id] === undefined)
                     return 0;
                 else
                     return this.tableData[course_id].length;
             }
         },
-        beforeMount: function(){
+        beforeMount: function () {
             checkLogin(this);
             Axios.get(getApiPath('score/teach_courses/' + localStorage.getItem('teacher_id')))
                 .then((res) => {
-                    if(res.status !== 200)
+                    if (res.status !== 200)
                         this.$message({
                             type: 'error',
                             duration: 1500,
@@ -324,7 +324,7 @@
 
                         Axios.get(getApiPath('score/publicity'))
                             .then((res) => {
-                                if(res.status !== 200)
+                                if (res.status !== 200)
                                     this.$message({
                                         type: 'error',
                                         duration: 1500,
@@ -355,11 +355,12 @@
 </script>
 
 <style scoped>
-    .teach-query-score{
-        text-align: left;
-    }
-    .header-name{
-        font-size: 2em;
-    }
+  .teach-query-score {
+    text-align: left;
+  }
+
+  .header-name {
+    font-size: 2em;
+  }
 
 </style>
