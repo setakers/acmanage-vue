@@ -75,23 +75,7 @@
         data() {
             return {
                 keyword: '',
-                results: [
-                    {
-                        user_id: 123,
-                        user_name: 'xxx学',
-                        character: 1,
-                        gender: '',
-                        email: 'xxx',
-                        phone: '该门课程是关于xxx，将对xxx进行教学',
-                    },
-                    {
-                        user_id: 123,
-                        user_name: 'xxx学',
-                        character: 1,
-                        gender: '',
-                        email: 'xxx',
-                        phone: '该门课程是关于xxx，将对xxx进行教学',
-                    }],
+                results: [ ],
                 loading: false
             }
         },
@@ -119,7 +103,7 @@
 
                         this.loading = false;
                     })
-                    .catch( (err) => {
+                    .catch( () => {
                         this.$message({
                             type: 'error',
                             duration: 1500,

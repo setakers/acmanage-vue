@@ -203,7 +203,7 @@
 
                 this.$set(this.courses[course_index], 'unmarked_stu', this.tableData[course_id].filter((item) => item.score === null).length);
 
-                //console.log(table_index);     //Note: table_index会随页数的改变而改变
+                //Note: table_index会随页数的改变而改变
             },
             handlePost() {
                 this.dialogVisible = false;
