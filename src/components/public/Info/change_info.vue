@@ -42,7 +42,7 @@
                             if(res.status !== 200) callback(new Error('请输入正确的工号或学号'));
                             else callback();
                         })
-                        .catch((err) => {
+                        .catch(() => {
                             callback(new Error('无法连接到服务器'));
                         });
                 }
@@ -87,14 +87,9 @@
         },
         methods: {
             onSubmit(formName) {
-                // console.log(this.form.user_name);
-                // console.log(typeof this.form.gender);
-                // console.log(this.form.email);
-                // console.log(this.form.phone);
-
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        var info = {
+                        const info = {
                             user_id: localStorage.getItem('user_id'),
                             user_name: this.form.user_name,
                             gender: parseInt(this.form.gender),
