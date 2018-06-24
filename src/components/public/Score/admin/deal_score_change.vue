@@ -133,12 +133,12 @@
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    var which = (this.currentPage - 1 ) * this.pagesize + index;
-                    var change = {
-                         query_id: query.query_id,
-                            state: operation,
+                    const which = (this.currentPage - 1 ) * this.pagesize + index;
+                    const change = {
+                        query_id: query.query_id,
+                        state: operation,
                         deal_time: (new Date()).valueOf()
-                    );
+                    };
                     Axios.put(getApiPath('score/handle_query'), change )
                         .then( (res) => {
                             if(res.status !== 200) {
@@ -157,7 +157,7 @@
                                 this.tableData.splice(which, 1);
                             }
                         })
-                        .catch( (err) => {
+                        .catch( () => {
                             this.$message({
                                 type: 'error',
                                 duration: 1500,
@@ -183,7 +183,7 @@
                         this.tableData = res.data['tableData'];
                     }
                 })
-                .catch((err) => {
+                .catch(() => {
                     this.$message({
                         type: 'error',
                         duration: 1500,
