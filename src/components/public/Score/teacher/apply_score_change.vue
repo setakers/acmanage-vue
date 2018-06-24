@@ -21,7 +21,10 @@
                       disable-transitions>课程简介：{{ course.introduction }}
               </el-tag>
             </template>
-            <template v-if=" handleTotal(course.course_id) !== 0">
+            <div    v-loading="loading"
+                    element-loading-text="拼命加载中"
+                    element-loading-spinner="el-icon-loading">
+              <template v-if=" handleTotal(course.course_id) !== 0">
               <el-pagination
                       style="text-align: center; padding: 20px 0;"
                       @size-change="handleSizeChange"
@@ -76,9 +79,10 @@
                 </el-table-column>
               </el-table>
             </template>
-            <template v-else>
+              <template v-else>
               <br/><em>该门课程暂时没有选定的学生</em>
             </template>
+            </div>
           </el-collapse-item>
         </template>
       </el-collapse>
@@ -118,8 +122,8 @@
     export default {
         name: "apply_score_change",
         data() {
-            var validateScore = (rule, value, callback) => {
-                var num = parseInt(value);
+            const validateScore = (rule, value, callback) => {
+                let num = parseInt(value);
 
                 if (isNaN(num)) {
                     callback(new Error('分数必须是一个数字'));
@@ -128,7 +132,7 @@
                 } else
                     callback();
             };
-            var validateReason = (rule, value, callback) => {
+            const validateReason = (rule, value, callback) => {
                 if (value === '') {
                     callback(new Error('申请理由不能为空'));
                 } else {
@@ -137,6 +141,7 @@
             };
             return {
                 dialogVisible: false,
+                loading: false,
 
                 formtable: {
                     reason: '',
@@ -153,33 +158,9 @@
                 currentPage: 1,
                 activeName: '-1',
 
-                courses: [{
-                    course_id: 456,
-                    course_name: 'xxx学',
-                    credit: 3.5,
-                    introduction: '该门课程是关于xxx，将对xxx进行教学',
-                }],
-                tableData: {
-                    456: [{
-                        student_id: 123,
-                        student_name: 'xxx',
-                        score: 95,
-                        applied: true
-                    },
-                        {
-                            student_id: 456,
-                            student_name: 'xxx',
-                            score: 85,
-                            applied: false
-                        },
-                        {
-                            student_id: 789,
-                            student_name: 'xxx',
-                            score: 61,
-                            applied: false
-                        }]
-                },
-                publicity: []
+                courses: [ ],
+                tableData: { },
+                publicity: [ ]
             };
         },
         methods: {
@@ -196,24 +177,30 @@
                 if (course_id === '')
                     return;
 
+                this.loading = true;
+
                 this.pagesize = 15;
                 this.currentPage = 1;
 
                 Axios.get(getApiPath('score/stu_of_course/' + course_id))
                     .then((res) => {
-                        if (res.status !== 200)
+                        if (res.status !== 200) {
                             this.$message({
                                 type: 'error',
                                 duration: 1500,
                                 message: '获取教学班信息失败，请检查网络连接'
                             });
-                        else {
-                            this.$set(this.tableData, course_id, res.data['students'].filter((item) => item.score !== null));
 
-                            var pending = this.publicity.filter((query) => query.state === 2 && query.course_id === parseInt(this.activeName));
+                        } else {
+                            this.$set(this.tableData, course_id, res.data['students'].filter((item) => item.score !== undefined));
+
+                            const pending = this.publicity.filter((query) => {
+                                return query.state === 2 && query.course_id === course_id;
+                            });
+
                             this.tableData[course_id].forEach((item, index) => {
                                 for (let i in pending) {
-                                    var query = this.pending[i];
+                                    const query = pending[i];
                                     if (query.student_id === item.student_id) {
                                         this.$set(this.tableData[course_id][index], 'applied', true);
                                         return;
@@ -222,13 +209,16 @@
                                 this.$set(this.tableData[course_id][index], 'applied', false);
                             });
                         }
+
+                        this.loading = false;
                     })
-                    .catch((err) => {
+                    .catch(() => {
                         this.$message({
                             type: 'error',
                             duration: 1500,
                             message: '获取教学班信息失败，请检查网络连接'
                         });
+                        this.loading = false;
                     });
             },
             handleScore(value) {
@@ -244,11 +234,9 @@
                     return 'danger';
             },
             handlePost(scoreForm) {
-                console.log('in handle post');
                 this.$refs[scoreForm].validate((valid) => {
-                    console.log(valid);
                     if (valid) {
-                        var query_score = {
+                        const query_score = {
                             query_id: null,
                             teacher_id: localStorage.getItem('teacher_id'),
                             student_id: this.formtable.student.student_id,
@@ -263,7 +251,7 @@
                         Axios.post(getApiPath('score/add_query_score_change'), query_score)
                             .then((res) => {
                                 if (res.status === 200) {
-                                    var index = (this.currentPage - 1) * this.pagesize + this.formtable.index;
+                                    const index = (this.currentPage - 1) * this.pagesize + this.formtable.index;
                                     this.tableData[this.activeName][index].applied = true;
 
                                     this.$message({
@@ -288,7 +276,7 @@
                                     });
                                     return false;
                                 }
-                            }).catch((err) => {
+                            }).catch(() => {
                             this.$message({
                                 type: 'error',
                                 duration: 1500,
@@ -334,7 +322,7 @@
                                     this.publicity = res.data['tableData'];
                                 }
                             })
-                            .catch((err) => {
+                            .catch(() => {
                                 this.$message({
                                     type: 'error',
                                     duration: 1500,
@@ -343,7 +331,7 @@
                             });
                     }
                 })
-                .catch((err) => {
+                .catch(() => {
                     this.$message({
                         type: 'error',
                         duration: 1500,

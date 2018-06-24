@@ -105,7 +105,7 @@
                         Axios.put(getApiPath('info/userinfo'), info)
                             .then((res) => {
                                 if(res.status === 200) {
-                                    for( prop in this.form)
+                                    for( let prop in this.form)
                                         localStorage.setItem(prop, this.form[prop]);
                                     this.$message(
                                         {
@@ -114,6 +114,13 @@
                                            message: '个人信息修改成功'
                                         }
                                     );
+                                    localStorage.setItem('user_id', info.user_id);
+                                    localStorage.setItem('user_name', info.user_name);
+                                    localStorage.setItem('gender', info.gender);
+                                    localStorage.setItem('email', info.email);
+                                    localStorage.setItem('phone', info.phone);
+
+
                                 } else {
                                     this.$message(
                                         {

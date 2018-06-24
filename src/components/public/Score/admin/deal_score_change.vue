@@ -92,31 +92,7 @@
             return {
                 pagesize: 10,
                 currentPage: 1,
-                tableData: [
-                    {
-                        teacher_name: '2016-05-02',
-                        student_name: '王小虎',
-                        course_name: '上海市普陀区金沙江路 1518 弄',
-                        old_score: 12,
-                        new_score: 98,
-                        reason: '124',
-                        state: 1,
-                        query_time: 'time1',
-                        deal_time: 'time',
-                    },
-                    {
-                        teacher_name: '2016-05-02',
-                        student_name: '王小虎',
-                        course_name: '上海市普陀区金沙江路 1518 弄',
-                        old_score: 12,
-                        new_score: 98,
-                        reason: '123',
-                        state: 2,
-                        query_time: 'time',
-                        deal_time: 'time2',
-                        tag: '家'
-                    }
-                ]
+                tableData: [ ]
             }
         },
         methods: {
@@ -128,6 +104,7 @@
                 this.currentPage = currentPage;
             },
             handle(operation, query, index) {
+                console.log(query);
                 this.$confirm( operation === 1 ? '此操作将接受该修改申请, 是否继续?':'此操作将拒绝该修改申请, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
