@@ -14,9 +14,9 @@
                     <span class="female" v-else>女</span>
                 </div>
                 <div style="font-size:10pt;color:#999">
-                    <span v-if="!userCharacter">学号：</span>
+                    <span v-if="userCharacter!==0">学号：</span>
                     <span v-else>工号：</span>
-                    {{userCharacter?teacherId:studentId}}
+                    {{userCharacter===0?teacherId:studentId}}
                 </div>
             </div>
         </div>
